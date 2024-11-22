@@ -59,7 +59,7 @@ export default function Home() {
                 id={featuredStory.id}
                 category={featuredStory.category}
                 title={featuredStory.title}
-                content={featuredStory.content}
+                description={featuredStory.description}
                 image={featuredStory.image}
               />
             </div>
@@ -72,7 +72,7 @@ export default function Home() {
                   id={story.id}
                   category={story.category}
                   title={story.title}
-                  content={story.content}
+                  description={story.description}
                   image={story.image}
                 />
               </div>

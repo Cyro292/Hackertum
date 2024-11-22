@@ -68,9 +68,13 @@ export default function StoryDetail() {
 
 					<div className="prose prose-lg max-w-none">
 						<p className="text-lg leading-relaxed text-gray-700">
-							{story.content}
+							{story.description}
 						</p>
 					</div>
+
+                    <div className="prose prose-lg max-w-none mt-8">
+                        <div dangerouslySetInnerHTML={{ __html: story.content }} />
+                    </div>
 
 					<div className="mt-8 pt-8 border-t">
 						<h2 className="text-2xl font-bold mb-4">Related Stories</h2>
