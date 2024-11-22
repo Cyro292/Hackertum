@@ -1,0 +1,68 @@
+{
+    "stories": [
+      {
+        "id": 1,
+        "category": "Technology",
+        "title": "Revolutionary Solid-State Battery Breakthrough",
+        "content": "A new solid-state battery technology promises 1000-mile range and 5-minute charging times, setting new standards for EV capabilities.",
+        "image": "/battery-tech.jpg",
+        "isFeature": true
+      },
+      {
+        "id": 2,
+        "category": "Market",
+        "title": "Tesla Stock Soars on Record Deliveries",
+        "content": "Tesla shares jump 15% as Q1 deliveries exceed analyst expectations by 25%, marking a new milestone for the EV giant.",
+        "image": "/tesla-stock.jpg"
+      },
+      {
+        "id": 3,
+        "category": "Industry",
+        "title": "VW Announces $20B EV Investment",
+        "content": "Volkswagen Group commits $20 billion to expand electric vehicle production across Europe and North America.",
+        "image": "/vw-factory.jpg"
+      },
+      {
+        "id": 4,
+        "category": "Technology",
+        "title": "Wireless Charging Roads Debut",
+        "content": "Sweden unveils first public road with embedded wireless charging technology for EVs while driving.",
+        "image": "/wireless-road.jpg"
+      },
+      {
+        "id": 5,
+        "category": "Reviews",
+        "title": "2024 Rivian R2 First Look",
+        "content": "Our comprehensive review of Rivian's latest mid-size electric SUV reveals impressive range and features.",
+        "image": "/rivian-r2.jpg"
+      },
+      {
+        "id": 6,
+        "category": "Infrastructure",
+        "title": "Global Charging Network Expansion",
+        "content": "Major automakers join forces to create unified global charging network with 100,000 new stations planned.",
+        "image": "/charging-network.jpg"
+      },
+      {
+        "id": 7,
+        "category": "Innovation",
+        "title": "Solar-Powered EV Sets Record",
+        "content": "Student-built solar electric vehicle completes 1,000-mile journey on single charge.",
+        "image": "/solar-ev.jpg"
+      },
+      {
+        "id": 8,
+        "category": "Market",
+        "title": "China EV Exports Surge",
+        "content": "Chinese EV manufacturers see 200% increase in international exports as global demand rises.",
+        "image": "/china-ev.jpg"
+      },
+      {
+        "id": 9,
+        "category": "Technology",
+        "title": "AI-Powered Battery Management",
+        "content": "New AI system optimizes EV battery life and charging patterns, extending range by up to 30%.",
+        "image": "/ai-battery.jpg"
+      }
+    ]
+  }
