@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from .routers import stories_router
+from .routers import stories_router, user_likes_router
 from .database import connect_to_mongo, close_mongo_connection, create_indexes
 
 
@@ -24,4 +24,5 @@ app = FastAPI(
     lifespan=lifespan
 )
 app.include_router(stories_router)
+app.include_router(user_likes_router)
 # app.include_router(admin_router)

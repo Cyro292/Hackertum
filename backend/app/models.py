@@ -1,5 +1,6 @@
+from datetime import datetime
 from typing import List, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from pydantic.json_schema import JsonSchemaValue
 from bson import ObjectId
 
@@ -19,7 +20,6 @@ class PyObjectId(ObjectId):
     def __get_pydantic_json_schema__(cls) -> JsonSchemaValue:
         return {"type": "string", "pattern": "^[0-9a-fA-F]{24}$"}
 
-# Data models for MongoDB (DBO - Database Objects)
 class UserLikeDBO(BaseModel):
     name: str
     image: str
@@ -38,8 +38,30 @@ class StoryDBO(BaseModel):
     readtime: Optional[str] = "1 min read"
     isFeature: Optional[bool] = False
     likes: List[PyObjectId] = Field(default_factory=list)
-    publishedAt: str
-    author: str = ""
+    publishedAt: str  # Existing Field
+    author: str = ""   # Existing Field
+    audio: str = ""    # Existing Field
+    tags: List[str] = Field(default_factory=list)  # Existing Field
+    sources: List[str] = Field(default_factory=list)  # New Field
+
+    @validator('publishedAt')
+    def validate_published_at(cls, v):
+        # Optional: Validate the format of publishedAt
+        try:
+            datetime.strptime(v, "%Y-%m-%dT%H:%M:%S")
+        except ValueError:
+            raise ValueError("publishedAt must be in ISO 8601 format (YYYY-MM-DDTHH:MM:SS)")
+        return v
+
+    @validator('tags', each_item=True)
+    def lowercase_tags(cls, v):
+        return v.lower()
+
+    @validator('tags')
+    def unique_tags(cls, v):
+        if len(v) != len(set(v)):
+            raise ValueError("Duplicate tags are not allowed")
+        return v
 
     class Config:
         orm_mode = True
@@ -66,8 +88,11 @@ class Story(BaseModel):
     readtime: Optional[str] = "1 min read"
     isFeature: Optional[bool] = False
     likes: List[UserLike] = []
-    publishedAt: str
-    author: str = ""
+    publishedAt: str    # Existing Field
+    author: str = ""    # Existing Field
+    audio: str = ""     # Existing Field
+    tags: List[str] = Field(default_factory=list)  # Existing Field
+    sources: List[str] = Field(default_factory=list)  # New Field
 
     class Config:
         orm_mode = True
@@ -75,3 +100,4 @@ class Story(BaseModel):
 
 class NewsResponse(BaseModel):
     stories: List[Story]
+    hasMore: bool = False

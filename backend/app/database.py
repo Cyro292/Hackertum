@@ -1,5 +1,5 @@
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorCollection, AsyncIOMotorDatabase
-from pymongo import ASCENDING
+from pymongo import ASCENDING, TEXT
 
 from typing import cast
 
@@ -30,13 +30,18 @@ async def create_indexes():
     """
     Initialize the database by creating necessary indexes.
     """
-    # Index for stories
+    
+    # Indexes for stories
     await stories_collection.create_index([("category", ASCENDING)])
     await stories_collection.create_index([("title", ASCENDING)])
     await stories_collection.create_index([("publishedAt", ASCENDING)])
     await stories_collection.create_index([("author", ASCENDING)])
+    await stories_collection.create_index([("tags", ASCENDING)])      # Existing Multikey Index
+    await stories_collection.create_index([("sources", ASCENDING)])   # New Multikey Index
 
-    # Index for user_likes (if needed)
+    # Optional: Create a text index for full-text search on title and description
+    await stories_collection.create_index([("title", TEXT), ("description", TEXT)])
+
+    # Index for user_likes
     await user_likes_collection.create_index([("name", ASCENDING)], unique=True)
     # Add other index creations here if necessary
-

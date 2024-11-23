@@ -1,6 +1,8 @@
+from datetime import datetime
 from fastapi import APIRouter, HTTPException, Query
-from typing import List
+from typing import List, Optional
 from bson import ObjectId
+from pydantic import BaseModel, Field, validator
 
 from ..models import NewsResponse, Story, StoryDBO, UserLike
 from ..database import stories_collection, user_likes_collection
@@ -8,6 +10,30 @@ from ..database import stories_collection, user_likes_collection
 
 router = APIRouter(prefix="/api/v1/stories", tags=["Stories"])
 
+# Define StoryCreate model within this file for clarity
+class StoryCreate(BaseModel):
+    category: str
+    title: str
+    description: str
+    content: str
+    image: Optional[str] = ""
+    readtime: Optional[str] = "1 min read"
+    isFeature: Optional[bool] = False
+    likes: List[str] = []       # List of UserLike ObjectId strings
+    publishedAt: str            # Existing Field
+    author: str = ""            # Existing Field
+    audio: str = ""             # Existing Field
+    tags: List[str] = Field(default_factory=list)  # Existing Field
+    sources: List[str] = Field(default_factory=list)  # New Field
+
+    @validator('publishedAt')
+    def validate_published_at(cls, v):
+        # Optional: Validate the format of publishedAt
+        try:
+            datetime.strptime(v, "%Y-%m-%dT%H:%M:%S")
+        except ValueError:
+            raise ValueError("publishedAt must be in ISO 8601 format (YYYY-MM-DDTHH:MM:SS)")
+        return v
 
 async def dbo_to_model(story_dbo: StoryDBO) -> Story:
     """
@@ -35,7 +61,10 @@ async def dbo_to_model(story_dbo: StoryDBO) -> Story:
         isFeature=story_dbo.isFeature,
         likes=likes,
         publishedAt=story_dbo.publishedAt,
-        author=story_dbo.author
+        author=story_dbo.author,
+        audio=story_dbo.audio,
+        tags=story_dbo.tags,
+        sources=story_dbo.sources
     )
     return story
 
@@ -70,3 +99,57 @@ async def get_story_by_id(id: str):
     story_dbo = StoryDBO(**story_dbo_raw)
     story = await dbo_to_model(story_dbo)
     return story
+
+@router.post("/create_story", response_model=Story)
+async def create_story(story: StoryCreate):
+    # Validate UserLike ObjectIds
+    if story.likes:
+        valid_like_ids = []
+        for like_id in story.likes:
+            if ObjectId.is_valid(like_id):
+                valid_like_ids.append(ObjectId(like_id))
+            else:
+                raise HTTPException(status_code=400, detail=f"Invalid UserLike ID: {like_id}")
+        
+        # Optionally, verify that each UserLike exists
+        existing_likes = await user_likes_collection.find({"_id": {"$in": valid_like_ids}}).to_list(length=len(valid_like_ids))
+        if len(existing_likes) != len(valid_like_ids):
+            raise HTTPException(status_code=400, detail="One or more UserLike IDs do not exist.")
+    else:
+        valid_like_ids = []
+
+    story_dbo = StoryDBO(
+        category=story.category,
+        title=story.title,
+        description=story.description,
+        content=story.content,
+        image=story.image,
+        readtime=story.readtime,
+        isFeature=story.isFeature,
+        likes=valid_like_ids,
+        publishedAt=story.publishedAt,
+        author=story.author,
+        audio=story.audio,
+        tags=story.tags,
+        sources=story.sources
+    )
+
+    result = await stories_collection.insert_one(story_dbo.dict())
+    created_story = await stories_collection.find_one({"_id": result.inserted_id})
+    if not created_story:
+        raise HTTPException(status_code=500, detail="Failed to create story.")
+
+    story_model = await dbo_to_model(StoryDBO(**created_story))
+    return story_model
+
+# Optional: Retrieve Stories by Tag
+@router.get("/get_stories_by_tag", response_model=NewsResponse)
+async def get_stories_by_tag(tag: str, page: int = Query(1, ge=1), limit: int = Query(6, ge=1)):
+    skip = (page - 1) * limit
+    cursor = stories_collection.find({"tags": tag}).skip(skip).limit(limit)
+    stories_dbo_raw = await cursor.to_list(length=limit)
+    if not stories_dbo_raw:
+        return NewsResponse(stories=[])
+    stories_dbo = [StoryDBO(**story) for story in stories_dbo_raw]
+    stories = [await dbo_to_model(story) for story in stories_dbo]
+    return NewsResponse(stories=stories)
