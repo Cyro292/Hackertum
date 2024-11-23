@@ -14,8 +14,8 @@ export default function IndustryPage() {
 		const fetchStories = async () => {
 			try {
 				setLoading(true);
-				const data = await newsService.getStoriesByCategory("reviews");
-				setStories(data);
+				const data = await newsService.getStories(1, 7, "reviews");
+				setStories(data.stories);
 			} catch (err) {
 				console.error("Failed to fetch stories:", err);
 				setError("Failed to load stories");

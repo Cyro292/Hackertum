@@ -29,28 +29,22 @@ class NewsService {
 		});
 	}
 
-	async getFeaturedStory(): Promise<Story> {
-		try {
-			const featured =
-				this.stories.find((story) => story.isFeature) || this.stories[0];
-
-			// Simulate network delay
-			await new Promise((resolve) => setTimeout(resolve, 100));
-			return featured;
-		} catch (error) {
-			console.error("Error fetching featured story:", error);
-			throw error;
-		}
-	}
-
-	async getStories(page: number, limit: number = 6): Promise<NewsResponse> {
+	async getStories(
+		page: number,
+		limit: number = 6,
+		category: string | null = null
+	): Promise<NewsResponse> {
 		try {
 			const start = (page - 1) * limit;
 			const end = start + limit;
-			const paginatedStories = this.stories.slice(start, end);
+			const categoryStories = this.stories.filter((s) => {
+				if (!category) return true;
+				return s.category.toLowerCase() === category.toLowerCase();
+			});
+			const paginatedStories = categoryStories.slice(start, end);
+
 			const hasMore = end < this.stories.length;
 
-			// Simulate network delay
 			await new Promise((resolve) => setTimeout(resolve, 100));
 
 			return {
@@ -59,20 +53,6 @@ class NewsService {
 			};
 		} catch (error) {
 			console.error("Error fetching stories:", error);
-			throw error;
-		}
-	}
-
-	async getStoriesByCategory(category: string): Promise<Story[]> {
-		try {
-			const filteredStories = this.stories.filter(
-				(story) => story.category.toLowerCase() === category.toLowerCase()
-			);
-			// Simulate network delay
-			await new Promise((resolve) => setTimeout(resolve, 100));
-			return filteredStories;
-		} catch (error) {
-			console.error("Error fetching category stories:", error);
 			throw error;
 		}
 	}

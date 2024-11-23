@@ -5,7 +5,7 @@ import { newsService } from "@/services/newsService";
 import { useEffect, useState } from "react";
 import type { Story } from "@/types/news";
 
-export default function IndustryPage() {
+export default function LatestPage() {
 	const [stories, setStories] = useState<Story[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
@@ -14,8 +14,8 @@ export default function IndustryPage() {
 		const fetchStories = async () => {
 			try {
 				setLoading(true);
-				const data = await newsService.getStoriesByCategory("latest");
-				setStories(data);
+				const data = await newsService.getStories(1, 7, "latest");
+				setStories(data.stories);
 			} catch (err) {
 				console.error("Failed to fetch stories:", err);
 				setError("Failed to load stories");

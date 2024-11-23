@@ -8,6 +8,7 @@ import { ArrowLeft, Headphones, FileText } from "lucide-react";
 import { newsService } from "@/services/newsService";
 import type { Story } from "@/types/news";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import Footer from "@/components/ui/footer";
 
 export default function StoryDetail() {
 	const router = useRouter();
@@ -119,10 +120,12 @@ export default function StoryDetail() {
 										</p>
 									</div>
 								</div>
-								<audio controls className="w-full mb-8">
-									<source src={story.audioUrl} type="audio/mpeg" />
-									Your browser does not support the audio element.
-								</audio>
+								{story.audio && (
+									<audio controls className="w-full mb-8">
+										<source src={story.audio} type="audio/mpeg" />
+										Your browser does not support the audio element.
+									</audio>
+								)}
 
 								{/* Transcript Section */}
 								<div className="border-t pt-6">
@@ -140,6 +143,7 @@ export default function StoryDetail() {
 					</div>
 				</article>
 			</div>
+			<Footer />
 		</div>
 	);
 }

@@ -13,10 +13,11 @@ export interface Story {
 	content: string;
 	image?: string;
 	readtime?: string;
-	isFeature?: boolean;
 	likes: Like[];
 	publishedAt: string;
 	author?: string;
+	audio?: string;
+	tags?: string[];
 }
 
 export interface NewsResponse {

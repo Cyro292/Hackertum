@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function Footer() {
 	return (
-		<Card className="w-full border-none rounded-none bg-background">
+		<Card className="w-full border-none rounded-none bg-slate-100">
 			<div className="container px-4 py-8">
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 					<div className="space-y-3">
