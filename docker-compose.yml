@@ -29,6 +29,7 @@ services:
     build:
       context: ./backend
     container_name: api
+    restart: always
     ports:
       - "8000:8000"
     depends_on:
@@ -51,6 +52,7 @@ services:
   mongo:
     image: mongo:4.4
     container_name: mongo
+    restart: always
     volumes:
       - mongo_data:/data/db
 

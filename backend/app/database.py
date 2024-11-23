@@ -1,62 +1,42 @@
-import os
-from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
-from typing import cast, AsyncGenerator
-from fastapi import FastAPI, Request
-from pydantic_settings import BaseSettings
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorCollection, AsyncIOMotorDatabase
+from pymongo import ASCENDING
+
+from typing import cast
+
+from .constants import COLLECTION_NAME, DATABASE_NAME, MONGODB_URL, USER_LIKES_COLLECTION
 
 
-MONGO_DETAILS = os.getenv("MONGO_DETAILS", "mongodb://mongo:27017")
 client: AsyncIOMotorClient = cast(AsyncIOMotorClient, None)
+db: AsyncIOMotorDatabase = cast(AsyncIOMotorDatabase, None)
+stories_collection: AsyncIOMotorCollection = cast(AsyncIOMotorCollection, None)
+user_likes_collection: AsyncIOMotorCollection = cast(AsyncIOMotorCollection, None)
 
-class Settings(BaseSettings):
-    MONGO_DETAILS: str = "mongodb://mongo:27017"
-    DATABASE_NAME: str = "news_db"  # Specify your database name
 
-    class Config:
-        env_file = ".env"
+async def connect_to_mongo():
+    global client, db, stories_collection, user_likes_collection
 
-settings = Settings()
+    client = AsyncIOMotorClient(MONGODB_URL)
+    db = client[DATABASE_NAME]
 
-async def get_database(request: Request) -> AsyncIOMotorDatabase:
+    stories_collection = db[COLLECTION_NAME]
+    user_likes_collection = db[USER_LIKES_COLLECTION]
+
+async def close_mongo_connection():
+    await client.close()
+
+# Ensure indexes if necessary
+# For example, indexing the category field for faster queries
+async def create_indexes():
     """
-    Dependency to get the MongoDB database.
+    Initialize the database by creating necessary indexes.
     """
-    return request.app.state.db
+    # Index for stories
+    await stories_collection.create_index([("category", ASCENDING)])
+    await stories_collection.create_index([("title", ASCENDING)])
+    await stories_collection.create_index([("publishedAt", ASCENDING)])
+    await stories_collection.create_index([("author", ASCENDING)])
 
-async def connect_to_mongo(app: FastAPI):
-    """
-    Connect to MongoDB and store the client in the app's state.
-    """
-    global client
-
-    client = AsyncIOMotorClient(settings.MONGO_DETAILS)
-    app.state.db = client[settings.DATABASE_NAME]
-    print("Connected to MongoDB")
-
-async def close_mongo_connection(app: FastAPI):
-    """
-    Close the MongoDB connection.
-    """
-    app.state.db.client.close()
-    print("Closed MongoDB connection")
-
-async def get_next_sequence(db: AsyncIOMotorDatabase, name: str) -> int:
-    ret = await db.counters.find_one_and_update(
-        {'_id': name},
-        {'$inc': {'seq': 1}},
-        upsert=True,
-        return_document=True
-    )
-    return ret['seq']
-
-
-async def create_indexes(db: AsyncIOMotorDatabase):
-    """
-    Create necessary indexes for collections.
-    """
-    await db.pending_articles.create_index("id", unique=True)
-    await db.pending_articles.create_index("link", unique=True)
-    await db.articles.create_index("id", unique=True)
-    await db.articles.create_index("link", unique=True)
-    await db.counters.create_index("id", unique=True)  # Assuming counters use 'id'
+    # Index for user_likes (if needed)
+    await user_likes_collection.create_index([("name", ASCENDING)], unique=True)
+    # Add other index creations here if necessary
 

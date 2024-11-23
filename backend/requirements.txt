@@ -4,4 +4,4 @@ motor
 aiohttp
 pydantic
 pydantic-settings
-feedparser
+python-dotenv

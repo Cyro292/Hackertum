@@ -15,7 +15,7 @@ export default function StoryDetail() {
 	const params = useParams();
 	const [story, setStory] = useState<Story | null>(null);
 	const [loading, setLoading] = useState(true);
-	const [activeTab, setActiveTab] = useState("article");
+	// const [activeTab, setActiveTab] = useState("article");
 
 	useEffect(() => {
 		const loadStory = async () => {

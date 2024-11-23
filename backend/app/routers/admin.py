@@ -3,6 +3,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from typing import List
 
+from ..constants import STORY_ID_COUNTER_NAME
 from ..models import Story
 from ..database import get_database, get_next_sequence
 
@@ -29,11 +30,11 @@ async def edit_pending_article(id: int, updated_story: Story, db: AsyncIOMotorDa
     Edit a pending article.
     """
     # Ensure that we keep the original 'link' field
-    existing_article = await db.pending_articles.find_one({"id": id})
+    existing_article = await db.pending_articles.find_one({"_id": id})
     if not existing_article:
         raise HTTPException(status_code=404, detail="Pending article not found")
 
-    updated_data = updated_story.dict(exclude_unset=True)
+    updated_data = updated_story.model_dump(exclude_unset=True)
     updated_data['link'] = existing_article['link']  # Preserve the link
 
     result = await db.pending_articles.find_one_and_update(
@@ -50,13 +51,16 @@ async def accept_pending_article(id: int, db: AsyncIOMotorDatabase = Depends(get
     """
     Accept a pending article and move it to articles.
     """
-    article = await db.pending_articles.find_one({"id": id})
+    
+    article = await db.pending_articles.find_one({"_id": id})
+    
     if article:
         # Insert into articles
         await db.articles.insert_one(article)
         # Remove from pending_articles
-        await db.pending_articles.delete_one({"id": id})
+        await db.pending_articles.delete_one({"_id": id})
         return {"message": "Article accepted"}
+    
     raise HTTPException(status_code=404, detail="Pending article not found")
 
 @router.post("/pending_articles/{id}/decline")
@@ -64,9 +68,12 @@ async def decline_pending_article(id: int, db: AsyncIOMotorDatabase = Depends(ge
     """
     Decline a pending article and remove it from pending_articles.
     """
-    result = await db.pending_articles.delete_one({"id": id})
+
+    result = await db.pending_articles.delete_one({"_id": id})
+    
     if result.deleted_count == 1:
         return {"message": "Article declined"}
+    
     raise HTTPException(status_code=404, detail="Pending article not found")
 
 # Optional: Temporary Endpoint for Testing (Remove in Production)
@@ -75,14 +82,9 @@ async def create_mock_pending_article(story: Story, db: AsyncIOMotorDatabase = D
     """
     **Temporary Endpoint**: Create a mock pending article for testing.
     """
-    # Check if the link already exists to prevent duplicates
-    existing_article = await db.pending_articles.find_one({"link": story.link})
-    existing_article_in_articles = await db.articles.find_one({"link": story.link})
-    if existing_article or existing_article_in_articles:
-        raise HTTPException(status_code=400, detail="Article with this link already exists")
 
     # Generate a new unique ID
-    story.id = await get_next_sequence(db, 'storyid')
+    story.id = await get_next_sequence(db, STORY_ID_COUNTER_NAME)
 
     # Insert into pending_articles
     await db.pending_articles.insert_one(story.model_dump())
