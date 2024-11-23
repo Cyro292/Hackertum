@@ -3,8 +3,12 @@ import storiesData from "@/data/stories.json";
 import { Story, Like, NewsResponse } from "@/types/news";
 
 class NewsService {
-	private likes: Like[] = storiesData.likes;
+	private likes: Like[] = this.getLikedData();
 	private stories: Story[] = this.getStoryData();
+
+	private getLikedData(): Like[] {
+		return storiesData.likes;
+	}
 
 	private getStoryData(): Story[] {
 		const stories = storiesData.stories;
@@ -80,6 +84,47 @@ class NewsService {
 
 			return searchTerms.every((term) => searchableText.includes(term));
 		});
+	}
+
+	async getRelatedStories(
+		exclude: number[],
+		category: string,
+		tags: string[],
+		number: number = 3
+	): Promise<Story[]> {
+		const relatedStories = this.stories
+			.filter((story) => {
+				const hasCategory =
+					story.category.toLowerCase() === category.toLowerCase();
+				const hasTags = tags.every((tag) => story.tags?.includes(tag));
+				return !exclude.includes(story.id) && (hasCategory || hasTags);
+			})
+			.slice(0, number);
+
+		return relatedStories;
+	}
+
+	async getInlineStories(
+		exclude: number[],
+		category: string,
+		tags: string[]
+	): Promise<Story[]> {
+		const inlineStories = this.stories
+			.filter((story) => {
+				const hasCategory =
+					story.category.toLowerCase() === category.toLowerCase();
+				const hasTags = tags.every((tag) => story.tags?.includes(tag));
+				return !exclude.includes(story.id) && (hasCategory || hasTags);
+			})
+			.slice(0, 2);
+
+		return inlineStories;
+	}
+
+	async getFeaturedStory(category: string): Promise<Story | null> {
+		const featured = this.stories.find((story) => story.category === category);
+
+		return featured || null;
 	}
 }
 

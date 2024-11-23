@@ -30,9 +30,22 @@ export default function StoryDetail() {
 				}
 				setParagraphs(storyData.content.split(/\n\s*\n/));
 				setStory(storyData);
-				const data = await newsService.getStories(1, 3, storyData.category);
-				const newRelatedStories = data.stories.filter((s) => s.id !== storyId);
+				const newRelatedStories = await newsService.getRelatedStories(
+					storyId,
+					storyData.category,
+					storyData.tags || []
+				);
 				setRelatedStories(newRelatedStories);
+				const data = await newsService.getStories(1, 3);
+				const articles = await newsService.getInlineStories(
+					storyId,
+					storyData.category,
+					storyData.tags || []
+				);
+				// setArticle1(articles[0]);
+				if (articles.length > 0) {
+					setArticle2(articles[0]);
+				}
 			} catch (error) {
 				console.error("Failed to load story:", error);
 			} finally {
@@ -41,10 +54,6 @@ export default function StoryDetail() {
 		};
 		const loadArticles = async () => {
 			try {
-				const data = await newsService.getStories(1, 3);
-				const articles = data.stories.filter((s) => s.id !== Number(params.id));
-				// setArticle1(articles[0]);
-				setArticle2(articles[1]);
 			} catch (error) {
 				console.error("Failed to load articles:", error);
 			}
