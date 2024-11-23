@@ -3,16 +3,21 @@ import storiesData from "@/data/stories.json";
 import { Story, Like, NewsResponse } from "@/types/news";
 
 class NewsService {
-	private stories: Story[] = storiesData.stories;
 	private likes: Like[] = storiesData.likes;
+	private stories: Story[] = this.getStoryData();
 
-	private getStoryLikes(likes: (string | Like)[]): Like[] {
-		return likes.map((like) => {
-			const fullLike = this.likes.find((l) => l.id === like);
-			if (!fullLike) {
-				throw new Error(`Like with id ${like} not found`);
-			}
-			return fullLike;
+	private getStoryData(): Story[] {
+		const stories = storiesData.stories;
+
+		return stories.map((story) => {
+			if (!story.likes) return { ...story, likes: [] };
+			return {
+				...story,
+				likes: story.likes.map((like) => {
+					const newLike = this.likes.find((l) => l.id === like.id);
+					return newLike || like;
+				}).filter((like): like is Like => like !== undefined),
+			};
 		});
 	}
 
@@ -21,11 +26,6 @@ class NewsService {
 			const featured =
 				this.stories.find((story) => story.isFeature) || this.stories[0];
 
-			if (featured.likes) {
-				featured.likes = this.getStoryLikes(
-					featured.likes.map((like) => like.id)
-				);
-			}
 			// Simulate network delay
 			await new Promise((resolve) => setTimeout(resolve, 100));
 			return featured;
@@ -40,11 +40,6 @@ class NewsService {
 			const start = (page - 1) * limit;
 			const end = start + limit;
 			const paginatedStories = this.stories.slice(start, end);
-			paginatedStories.forEach((story) => {
-				if (story.likes) {
-					story.likes = this.getStoryLikes(story.likes.map((like) => like.id));
-				}
-			});
 			const hasMore = end < this.stories.length;
 
 			// Simulate network delay
@@ -65,11 +60,6 @@ class NewsService {
 			const filteredStories = this.stories.filter(
 				(story) => story.category.toLowerCase() === category.toLowerCase()
 			);
-			filteredStories.forEach((story) => {
-				if (story.likes) {
-					story.likes = this.getStoryLikes(story.likes.map((like) => like.id));
-				}
-			});
 			// Simulate network delay
 			await new Promise((resolve) => setTimeout(resolve, 100));
 			return filteredStories;
@@ -82,9 +72,6 @@ class NewsService {
 	async getStoryById(id: number): Promise<Story | null> {
 		try {
 			const story = this.stories.find((s) => s.id === id);
-			if (story && story.likes) {
-				story.likes = this.getStoryLikes(story.likes.map((like) => like.id));
-			}
 			await new Promise((resolve) => setTimeout(resolve, 100));
 			return story || null;
 		} catch (error) {

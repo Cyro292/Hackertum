@@ -17,6 +17,7 @@ const initialStocks: StockData[] = [
 ];
 
 export function StockTicker() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [stocks, setStocks] = useState(initialStocks);
 
 	return (

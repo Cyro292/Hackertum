@@ -14,7 +14,7 @@ export interface Story {
 	image?: string;
 	readtime?: string;
 	isFeature?: boolean;
-	likes?: Like[] | { id: string }[];
+	likes: Like[];
 }
 
 export interface NewsResponse {

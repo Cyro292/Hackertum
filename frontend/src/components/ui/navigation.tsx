@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { StockTicker } from "@/components/ui/stockticker";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import Link from "next/link";
 
 export function Navigation() {
 	return (
@@ -24,7 +25,9 @@ export function Navigation() {
 					<Button variant="ghost">Technology</Button>
 					<Button variant="ghost">Reviews</Button>
 					<Button variant="ghost">Industry</Button>
-					<Button variant="default">Subscribe</Button>
+					<Link href="/subscribe">
+						<Button variant="default">Subscribe</Button>
+					</Link>
 				</nav>
 			</div>
 		</header>
