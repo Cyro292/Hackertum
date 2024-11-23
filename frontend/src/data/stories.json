@@ -23,9 +23,13 @@
 			"title": "Revolutionary Solid-State Battery Breakthrough",
 			"description": "A new solid-state battery technology promises 1000-mile range and 5-minute charging times, setting new standards for EV capabilities.",
 			"content": "In a groundbreaking development, researchers at the Advanced Battery Institute have unveiled a revolutionary solid-state battery technology that could transform the electric vehicle industry. The new battery design utilizes a proprietary ceramic electrolyte that enables unprecedented charging speeds while maintaining exceptional stability and safety.\n\nThe technology demonstrates remarkable metrics:\n- 1000-mile range on a single charge\n- 5-minute charging time to 80% capacity\n- Over 2000 charge cycles without significant degradation\n- Operating temperature range from -20°C to 60°C\n\nDr. Sarah Chen, lead researcher on the project, explains: 'This breakthrough addresses the three main challenges in current EV batteries: range anxiety, charging time, and battery longevity.' Several major automakers have already expressed interest in licensing the technology, with pilot production expected to begin in early 2025.\n\nThe implications for the EV industry are profound, potentially eliminating the last major barriers to widespread EV adoption. Industry analysts predict this technology could accelerate the transition to electric vehicles by at least five years.",
-			"image": "/battery-tech.jpg",
+			"image": "https://cdn.esawebb.org/archives/images/screen/weic2205a.jpg",
 			"isFeature": true,
-			"likes": [{ "id": "1" }, { "id": "2" }, { "id": "3" }]
+			"likes": [{ "id": "1" }, { "id": "2" }, { "id": "3" }],
+			"tags": ["battery", "technology", "solid-state"],
+			"sources": [
+				"https://www.advancedbatteryinstitute.com/news/revolutionary-solid-state-battery-breakthrough"
+			]
 		},
 		{
 			"id": 2,
@@ -33,8 +37,9 @@
 			"title": "Tesla Stock Soars on Record Deliveries",
 			"description": "Tesla shares jump 15% as Q1 deliveries exceed analyst expectations by 25%, marking a new milestone for the EV giant.",
 			"content": "Tesla's stock (TSLA) experienced a dramatic surge today, climbing 15% following the announcement of record-breaking Q1 delivery numbers. The electric vehicle manufacturer reported delivering 412,000 vehicles in the first quarter of 2024, exceeding Wall Street expectations by a remarkable 25%.\n\nThe impressive delivery figures include:\n- Model Y: 245,000 units\n- Model 3: 125,000 units\n- Model S/X: 42,000 units\n\nThis performance demonstrates Tesla's continued dominance in the global EV market, despite increasing competition from traditional automakers and new EV startups. The company's successful ramp-up of production at its Berlin and Texas gigafactories has played a crucial role in achieving these numbers.\n\nAnalysts from major investment banks have revised their price targets upward, with Morgan Stanley's Adam Jonas noting, 'Tesla's execution in scaling production while maintaining healthy margins sets them apart in the industry.' The company's stock closed at $276.45, its highest level since September 2023.",
-			"image": "/tesla-stock.jpg",
-			"likes": [{ "id": "1" }, { "id": "2" }]
+			"image": "https://t4.ftcdn.net/jpg/05/37/32/57/360_F_537325726_GtgjRiyc37BLPn9OmisBVVZec9frLaL0.jpg",
+			"likes": [{ "id": "1" }, { "id": "2" }],
+			"tags": ["tesla", "stock", "deliveries"]
 		},
 		{
 			"id": 3,
@@ -42,7 +47,7 @@
 			"title": "VW Announces $20B EV Investment",
 			"description": "Volkswagen Group commits $20 billion to expand electric vehicle production across Europe and North America.",
 			"content": "Volkswagen Group has unveiled an ambitious $20 billion investment plan to accelerate its electric vehicle production capabilities across Europe and North America. This strategic initiative, announced at the company's annual investor conference in Wolfsburg, represents VW's largest-ever commitment to electric mobility.\n\nThe investment will be allocated across several key areas:\n- $8B for new battery gigafactories\n- $6B for EV platform development\n- $4B for charging infrastructure\n- $2B for software development\n\nCEO Oliver Blume emphasized the company's commitment: 'This investment ensures Volkswagen's position as a leader in the electric revolution. By 2026, we aim to offer electric variants in every vehicle segment.' The plan includes the construction of three new gigafactories and the conversion of existing plants to EV production.\n\nThe company expects this initiative to create over 25,000 new jobs and enable the production of 2 million EVs annually by 2026. Environmental groups have praised the announcement as a significant step toward reducing automotive emissions.",
-			"image": "/vw-factory.jpg",
+			"image": "https://economictimes.indiatimes.com/thumb/msid-106775052,width-1600,height-900,resizemode-4,imgsize-69266/mclaren-750s-launched-in-india-at-rs-5-91-crore-what-makes-it-so-expensive.jpg?from=mdr",
 			"likes": [{ "id": "1" }, { "id": "3" }]
 		},
 		{
@@ -92,7 +97,7 @@
 			"title": "Solid-State Battery Production Breakthrough",
 			"description": "Toyota announces first mass-production solid-state battery facility with 2025 production target.",
 			"content": "Toyota has revealed plans for the world's first mass-production facility dedicated to solid-state batteries, with production scheduled to begin in 2025. The $5.6 billion plant, located in Japan's Aichi Prefecture, represents a major breakthrough in scaling up solid-state battery technology.\n\nFacility specifications:\n- Annual production capacity: 100,000 battery packs\n- Automated production lines\n- AI-driven quality control\n- Integrated recycling facility\n\nSolid-state batteries promise several advantages over current lithium-ion technology, including faster charging times, higher energy density, and improved safety. Toyota claims their design achieves a 500-mile range with 10-minute charging capability.\n\nIndustry experts consider this development a potential tipping point for EV adoption, as solid-state batteries address many current limitations of electric vehicles.",
-			"image": "/solid-state-factory.jpg"
+			"image": "https://cdn.esawebb.org/archives/images/screen/weic2205a.jpg"
 		}
 	]
 }

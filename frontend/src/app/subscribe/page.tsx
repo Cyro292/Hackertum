@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { userService } from "@/services/userService";
 import { Mail, Zap, Globe, Clock, Shield } from "lucide-react";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Footer from "@/components/ui/footer";
 
 export default function SubscribePage() {
 	const [email, setEmail] = useState("");
@@ -44,21 +45,30 @@ export default function SubscribePage() {
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
 			<div className="container mx-auto px-4 py-16 space-y-16">
-				{/* Hero Section */}
 				<div>
-					<div className="max-w-4xl mx-auto text-center space-y-6">
-						<span className="px-3 py-1 text-sm font-semibold bg-gray-100 text-gray-700 rounded-full">
-							Join 10,000+ EV enthusiasts
-						</span>
-						<h1 className="text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-							Stay Ahead in the Electric Revolution
-						</h1>
-						<p className="text-xl text-gray-600 max-w-2xl mx-auto">
-							Get exclusive insights, breaking news, and expert analysis on the
-							future of electric vehicles.
-						</p>
-					</div>
+					<Button
+						variant="ghost"
+						onClick={() => router.back()}
+						className="mb-8 hover:scale-105 transition-transform"
+					>
+						<ArrowLeft className="mr-2 h-4 w-4" />
+						Back
+					</Button>
 
+					<div>
+						<div className="max-w-4xl mx-auto text-center space-y-6">
+							<span className="px-3 py-1 text-sm font-semibold bg-gray-100 text-gray-700 rounded-full">
+								Join 10,000+ EV enthusiasts
+							</span>
+							<h1 className="text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+								Stay Ahead in the Electric Revolution
+							</h1>
+							<p className="text-xl text-gray-600 max-w-2xl mx-auto">
+								Get exclusive insights, breaking news, and expert analysis on
+								the future of electric vehicles.
+							</p>
+						</div>
+					</div>
 					{/* Main Content */}
 					<div className="grid lg:grid-rows-2 items-center max-w-6xl mx-auto">
 						<div className="space-y-8">
@@ -114,6 +124,7 @@ export default function SubscribePage() {
 					</cite>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 }

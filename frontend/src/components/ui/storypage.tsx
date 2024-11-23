@@ -101,6 +101,7 @@ export function StoryPage({ stories, showBadges = true }: StoryPageProps) {
 								description={featuredStory.description}
 								image={featuredStory.image}
 								likes={featuredStory.likes}
+								tags={featuredStory.tags}
 								style="featured"
 							/>
 						</div>
@@ -116,6 +117,7 @@ export function StoryPage({ stories, showBadges = true }: StoryPageProps) {
 								description={story.description}
 								image={story.image}
 								likes={story.likes}
+								tags={story.tags}
 								style="compact"
 							/>
 						))}

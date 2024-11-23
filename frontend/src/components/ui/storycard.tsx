@@ -13,6 +13,7 @@ interface StoryCardProps {
 	image?: string;
 	style?: string;
 	likes?: Like[];
+	tags?: string[];
 }
 
 export function StoryCard({
@@ -22,6 +23,7 @@ export function StoryCard({
 	description,
 	image,
 	likes = [],
+	tags = [],
 	style = "featured",
 }: StoryCardProps) {
 	const router = useRouter();
@@ -43,7 +45,22 @@ export function StoryCard({
 							/>
 						</div>
 						<div className="space-y-4">
-							<Badge>{category}</Badge>
+							<div className="flex flex-row gap-10 items-start">
+								<Badge>{category}</Badge>
+								{tags && tags.length > 0 && (
+									<div className="flex flex-wrap gap-2">
+										{tags.map((tag, index) => (
+											<Badge
+												key={index}
+												variant="secondary"
+												className="px-2 py-0.5 text-xs rounded-full"
+											>
+												{tag}
+											</Badge>
+										))}
+									</div>
+								)}
+							</div>
 							<h2 className="text-3xl font-bold">{title}</h2>
 							<p className="text-muted-foreground">{description}</p>
 							<Button onClick={handleNavigate}>Read Full Story</Button>
@@ -67,7 +84,22 @@ export function StoryCard({
 				onClick={handleNavigate}
 			>
 				<CardHeader>
-					<Badge className="w-fit">{category}</Badge>
+					<div className="flex flex-row gap-10 items-start">
+						<Badge className="w-fit">{category}</Badge>
+						{tags && tags.length > 0 && (
+							<div className="flex flex-wrap gap-2">
+								{tags.map((tag, index) => (
+									<Badge
+										key={index}
+										variant="secondary"
+										className="px-2 py-0.5 text-xs rounded-full"
+									>
+										{tag}
+									</Badge>
+								))}
+							</div>
+						)}
+					</div>
 					<h2 className="text-xl font-bold mt-2">{title}</h2>
 				</CardHeader>
 				<CardContent>
@@ -93,12 +125,27 @@ export function StoryCard({
 						<img
 							src={image || "/ev-featured.jpg"}
 							alt={title}
-							className="rounded-lg w-full h-[200px] object-cover"
+							className="rounded-lg w-full h-full object-cover"
 						/>
 					</div>
-					<div>
+					<div className="w-2/3 p-4">
 						<CardHeader>
-							<Badge className="w-fit">{category}</Badge>
+							<div className="flex flex-row gap-10 items-start">
+								<Badge className="w-fit">{category}</Badge>
+								{tags && tags.length > 0 && (
+									<div className="flex flex-wrap gap-2">
+										{tags.map((tag, index) => (
+											<Badge
+												key={index}
+												variant="secondary"
+												className="px-2 py-0.5 text-xs rounded-full"
+											>
+												{tag}
+											</Badge>
+										))}
+									</div>
+								)}
+							</div>
 							<h2 className="text-xl font-bold mt-2">{title}</h2>
 						</CardHeader>
 						<CardContent>
