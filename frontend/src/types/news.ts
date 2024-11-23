@@ -18,6 +18,7 @@ export interface Story {
 	author?: string;
 	audio?: string;
 	tags?: string[];
+	sources?: string[];
 }
 
 export interface NewsResponse {

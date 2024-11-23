@@ -77,16 +77,23 @@ export default function StoryDetail() {
 				</Button>
 
 				<article className="max-w-4xl mx-auto">
-					<Badge className="mb-4">{story.category}</Badge>
+					<div className="flex items-center gap-4 mb-4">
+						<Badge>{story.category}</Badge>
+						{story.tags && story.tags.length > 0 && (
+							<div className="flex flex-wrap gap-2">
+								{story.tags.map((tag, index) => (
+									<Badge
+										key={index}
+										variant="secondary"
+										className="px-2 py-0.5 text-xs rounded-full"
+									>
+										{tag}
+									</Badge>
+								))}
+							</div>
+						)}
+					</div>
 					<h1 className="text-4xl font-bold mb-6">{story.title}</h1>
-
-					{story.image && (
-						<img
-							src={story.image}
-							alt={story.title}
-							className="w-full h-[500px] object-cover rounded-lg mb-8"
-						/>
-					)}
 
 					<div className="mb-6 text-lg text-gray-600 italic leading-relaxed">
 						<p>{story.description}</p>
@@ -103,6 +110,14 @@ export default function StoryDetail() {
 							</p>
 						</div>
 					</div>
+
+					{story.image && (
+						<img
+							src={story.image}
+							alt={story.title}
+							className="w-full h-[500px] object-cover rounded-lg mb-8"
+						/>
+					)}
 
 					<div>
 						{story.audio && (
@@ -128,7 +143,6 @@ export default function StoryDetail() {
 							<div className="prose dark:prose-invert">
 								<p className="text-lg leading-relaxed">{paragraphs[0]}</p>
 							</div>
-
 							{/* {article1 && (
 								<StoryCard
 									id={article1.id}
@@ -137,14 +151,13 @@ export default function StoryDetail() {
 									description={article1.description}
 									image={article1.image}
 									likes={article1.likes}
+									tags={article1.tags}
 									style="picture"
 								/>
 							)} */}
-
 							<div className="prose dark:prose-invert">
 								<p className="text-lg leading-relaxed">{paragraphs[1]}</p>
 							</div>
-
 							{article2 && (
 								<StoryCard
 									id={article2.id}
@@ -153,14 +166,41 @@ export default function StoryDetail() {
 									description={article2.description}
 									image={article2.image}
 									likes={article2.likes}
+									tags={article2.tags}
 									style="picture"
 								/>
 							)}
-
 							<div className="prose dark:prose-invert">
 								<p className="text-lg leading-relaxed">
 									{paragraphs.slice(2).join("\n\n")}
 								</p>
+							</div>
+							{story.sources && story.sources.length > 0 && (
+								<div className="mt-8">
+									<h2 className="text-xl font-semibold mb-4">Sources</h2>
+									<ul className="list-disc list-inside">
+										{story.sources.map((source, index) => (
+											<li key={index} className="mb-2">
+												<a
+													href={source}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+													{source}
+												</a>
+											</li>
+										))}
+									</ul>
+								</div>
+							)}
+							<div className="flex items-center gap-4 mt-8">
+								<Button
+									onClick={() => router.push("/")}
+									className="hover:scale-105 transition-transform"
+								>
+									<ArrowLeft className="mr-2 h-4 w-4" />
+									Back to Home
+								</Button>
 							</div>
 						</div>
 					</div>
@@ -179,6 +219,7 @@ export default function StoryDetail() {
 										description={story.description}
 										image={story.image}
 										likes={story.likes}
+										tags={story.tags}
 										style="compact"
 									/>
 								))}

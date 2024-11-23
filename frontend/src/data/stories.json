@@ -25,7 +25,11 @@
 			"content": "In a groundbreaking development, researchers at the Advanced Battery Institute have unveiled a revolutionary solid-state battery technology that could transform the electric vehicle industry. The new battery design utilizes a proprietary ceramic electrolyte that enables unprecedented charging speeds while maintaining exceptional stability and safety.\n\nThe technology demonstrates remarkable metrics:\n- 1000-mile range on a single charge\n- 5-minute charging time to 80% capacity\n- Over 2000 charge cycles without significant degradation\n- Operating temperature range from -20°C to 60°C\n\nDr. Sarah Chen, lead researcher on the project, explains: 'This breakthrough addresses the three main challenges in current EV batteries: range anxiety, charging time, and battery longevity.' Several major automakers have already expressed interest in licensing the technology, with pilot production expected to begin in early 2025.\n\nThe implications for the EV industry are profound, potentially eliminating the last major barriers to widespread EV adoption. Industry analysts predict this technology could accelerate the transition to electric vehicles by at least five years.",
 			"image": "https://cdn.esawebb.org/archives/images/screen/weic2205a.jpg",
 			"isFeature": true,
-			"likes": [{ "id": "1" }, { "id": "2" }, { "id": "3" }]
+			"likes": [{ "id": "1" }, { "id": "2" }, { "id": "3" }],
+			"tags": ["battery", "technology", "solid-state"],
+			"sources": [
+				"https://www.advancedbatteryinstitute.com/news/revolutionary-solid-state-battery-breakthrough"
+			]
 		},
 		{
 			"id": 2,
@@ -34,7 +38,8 @@
 			"description": "Tesla shares jump 15% as Q1 deliveries exceed analyst expectations by 25%, marking a new milestone for the EV giant.",
 			"content": "Tesla's stock (TSLA) experienced a dramatic surge today, climbing 15% following the announcement of record-breaking Q1 delivery numbers. The electric vehicle manufacturer reported delivering 412,000 vehicles in the first quarter of 2024, exceeding Wall Street expectations by a remarkable 25%.\n\nThe impressive delivery figures include:\n- Model Y: 245,000 units\n- Model 3: 125,000 units\n- Model S/X: 42,000 units\n\nThis performance demonstrates Tesla's continued dominance in the global EV market, despite increasing competition from traditional automakers and new EV startups. The company's successful ramp-up of production at its Berlin and Texas gigafactories has played a crucial role in achieving these numbers.\n\nAnalysts from major investment banks have revised their price targets upward, with Morgan Stanley's Adam Jonas noting, 'Tesla's execution in scaling production while maintaining healthy margins sets them apart in the industry.' The company's stock closed at $276.45, its highest level since September 2023.",
 			"image": "https://t4.ftcdn.net/jpg/05/37/32/57/360_F_537325726_GtgjRiyc37BLPn9OmisBVVZec9frLaL0.jpg",
-			"likes": [{ "id": "1" }, { "id": "2" }]
+			"likes": [{ "id": "1" }, { "id": "2" }],
+			"tags": ["tesla", "stock", "deliveries"]
 		},
 		{
 			"id": 3,
