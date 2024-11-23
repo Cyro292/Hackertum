@@ -15,6 +15,8 @@ export interface Story {
 	readtime?: string;
 	isFeature?: boolean;
 	likes: Like[];
+	publishedAt: string;
+	author?: string;
 }
 
 export interface NewsResponse {

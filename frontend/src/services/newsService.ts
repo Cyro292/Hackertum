@@ -10,9 +10,15 @@ class NewsService {
 		const stories = storiesData.stories;
 
 		return stories.map((story) => {
-			if (!story.likes) return { ...story, likes: [] };
+			if (!story.likes)
+				return {
+					...story,
+					likes: [],
+					publishedAt: new Date().toISOString(),
+				};
 			return {
 				...story,
+				publishedAt: new Date().toISOString(),
 				likes: story.likes
 					.map((like) => {
 						const newLike = this.likes.find((l) => l.id === like.id);
