@@ -43,7 +43,7 @@ class NewsService {
 			});
 			const paginatedStories = categoryStories.slice(start, end);
 
-			const hasMore = end < this.stories.length;
+			const hasMore = end < categoryStories.length;
 
 			await new Promise((resolve) => setTimeout(resolve, 100));
 

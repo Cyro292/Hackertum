@@ -5,6 +5,7 @@ import { newsService } from "@/services/newsService";
 import { useEffect, useState } from "react";
 import type { Story } from "@/types/news";
 import { Button } from "@/components/ui/button";
+import Footer from "@/components/ui/footer";
 
 export default function Home() {
 	const [stories, setStories] = useState<Story[]>([]);
@@ -45,17 +46,20 @@ export default function Home() {
 
 	return (
 		<div className="space-y-8">
-			<StoryPage stories={stories} />
+			<div>
+				<StoryPage stories={stories} />
 
-			{loading && <div>Loading...</div>}
+				{loading && <div>Loading...</div>}
 
-			{!loading && hasMore && (
-				<div className="flex justify-center">
-					<Button onClick={handleLoadMore} variant="outline" className="mt-4">
-						Load More
-					</Button>
-				</div>
-			)}
+				{!loading && hasMore && (
+					<div className="flex justify-center mb-12">
+						<Button onClick={handleLoadMore} variant="outline">
+							Load More
+						</Button>
+					</div>
+				)}
+			</div>
+			<Footer />
 		</div>
 	);
 }

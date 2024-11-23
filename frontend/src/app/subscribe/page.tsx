@@ -105,8 +105,9 @@ export default function SubscribePage() {
 				{/* Testimonial */}
 				<div className="max-w-3xl mx-auto text-center">
 					<blockquote className="text-xl text-gray-600 italic">
-						&ldquo;The most comprehensive EV newsletter I&apos;ve subscribed to. A
-						must-have for anyone interested in the future of transportation.&ldquo;
+						&quot;The most comprehensive EV newsletter I&apos;ve subscribed to.
+						A must-have for anyone interested in the future of
+						transportation.&quot;
 					</blockquote>
 					<cite className="mt-4 block text-gray-700 font-semibold">
 						— John Smith, Tesla Monthly

@@ -11,7 +11,7 @@ interface StoryCardProps {
 	title: string;
 	description: string;
 	image?: string;
-	isFeature?: boolean;
+	style?: string;
 	likes?: Like[];
 }
 
@@ -21,8 +21,8 @@ export function StoryCard({
 	title,
 	description,
 	image,
-	isFeature = false,
 	likes = [],
+	style = "featured",
 }: StoryCardProps) {
 	const router = useRouter();
 
@@ -30,7 +30,7 @@ export function StoryCard({
 		router.push(`/story/${id}`);
 	};
 
-	if (isFeature) {
+	if (style === "featured") {
 		return (
 			<Card className="mb-12">
 				<CardContent className="p-6">
@@ -60,23 +60,58 @@ export function StoryCard({
 		);
 	}
 
-	return (
-		<Card
-			className="cursor-pointer hover:scale-[1.02] transition-all duration-200"
-			onClick={handleNavigate}
-		>
-			<CardHeader>
-				<Badge className="w-fit">{category}</Badge>
-				<h2 className="text-xl font-bold mt-2">{title}</h2>
-			</CardHeader>
-			<CardContent>
-				<p className="text-muted-foreground">{description}</p>
-				{likes.length > 0 && (
-					<div className="mt-4">
-						<AvatarGroup likes={likes} />
+	if (style === "compact") {
+		return (
+			<Card
+				className="cursor-pointer hover:scale-[1.02] transition-all duration-200"
+				onClick={handleNavigate}
+			>
+				<CardHeader>
+					<Badge className="w-fit">{category}</Badge>
+					<h2 className="text-xl font-bold mt-2">{title}</h2>
+				</CardHeader>
+				<CardContent>
+					<p className="text-muted-foreground">{description}</p>
+					{likes.length > 0 && (
+						<div className="mt-4">
+							<AvatarGroup likes={likes} />
+						</div>
+					)}
+				</CardContent>
+			</Card>
+		);
+	}
+
+	if (style === "picture") {
+		return (
+			<Card
+				className="cursor-pointer hover:scale-[1.02] transition-all duration-200"
+				onClick={handleNavigate}
+			>
+				<div className="flex">
+					<div className="w-1/3">
+						<img
+							src={image || "/ev-featured.jpg"}
+							alt={title}
+							className="rounded-lg w-full h-[200px] object-cover"
+						/>
 					</div>
-				)}
-			</CardContent>
-		</Card>
-	);
+					<div>
+						<CardHeader>
+							<Badge className="w-fit">{category}</Badge>
+							<h2 className="text-xl font-bold mt-2">{title}</h2>
+						</CardHeader>
+						<CardContent>
+							<p className="text-muted-foreground">{description}</p>
+							{likes.length > 0 && (
+								<div className="mt-4">
+									<AvatarGroup likes={likes} />
+								</div>
+							)}
+						</CardContent>
+					</div>
+				</div>
+			</Card>
+		);
+	}
 }
