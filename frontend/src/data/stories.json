@@ -1,77 +1,98 @@
 {
-    "stories": [
-      {
-        "id": 1,
-        "category": "Technology",
-        "title": "Revolutionary Solid-State Battery Breakthrough",
-        "description": "A new solid-state battery technology promises 1000-mile range and 5-minute charging times, setting new standards for EV capabilities.",
-        "content": "In a groundbreaking development, researchers at the Advanced Battery Institute have unveiled a revolutionary solid-state battery technology that could transform the electric vehicle industry. The new battery design utilizes a proprietary ceramic electrolyte that enables unprecedented charging speeds while maintaining exceptional stability and safety.\n\nThe technology demonstrates remarkable metrics:\n- 1000-mile range on a single charge\n- 5-minute charging time to 80% capacity\n- Over 2000 charge cycles without significant degradation\n- Operating temperature range from -20°C to 60°C\n\nDr. Sarah Chen, lead researcher on the project, explains: 'This breakthrough addresses the three main challenges in current EV batteries: range anxiety, charging time, and battery longevity.' Several major automakers have already expressed interest in licensing the technology, with pilot production expected to begin in early 2025.\n\nThe implications for the EV industry are profound, potentially eliminating the last major barriers to widespread EV adoption. Industry analysts predict this technology could accelerate the transition to electric vehicles by at least five years.",
-        "image": "/battery-tech.jpg",
-        "isFeature": true
-      },
-      {
-        "id": 2,
-        "category": "Market",
-        "title": "Tesla Stock Soars on Record Deliveries",
-        "description": "Tesla shares jump 15% as Q1 deliveries exceed analyst expectations by 25%, marking a new milestone for the EV giant.",
-        "content": "Tesla's stock (TSLA) experienced a dramatic surge today, climbing 15% following the announcement of record-breaking Q1 delivery numbers. The electric vehicle manufacturer reported delivering 412,000 vehicles in the first quarter of 2024, exceeding Wall Street expectations by a remarkable 25%.\n\nThe impressive delivery figures include:\n- Model Y: 245,000 units\n- Model 3: 125,000 units\n- Model S/X: 42,000 units\n\nThis performance demonstrates Tesla's continued dominance in the global EV market, despite increasing competition from traditional automakers and new EV startups. The company's successful ramp-up of production at its Berlin and Texas gigafactories has played a crucial role in achieving these numbers.\n\nAnalysts from major investment banks have revised their price targets upward, with Morgan Stanley's Adam Jonas noting, 'Tesla's execution in scaling production while maintaining healthy margins sets them apart in the industry.' The company's stock closed at $276.45, its highest level since September 2023.",
-        "image": "/tesla-stock.jpg"
-      },
-      {
-        "id": 3,
-        "category": "Industry",
-        "title": "VW Announces $20B EV Investment",
-        "description": "Volkswagen Group commits $20 billion to expand electric vehicle production across Europe and North America.",
-        "content": "Volkswagen Group has unveiled an ambitious $20 billion investment plan to accelerate its electric vehicle production capabilities across Europe and North America. This strategic initiative, announced at the company's annual investor conference in Wolfsburg, represents VW's largest-ever commitment to electric mobility.\n\nThe investment will be allocated across several key areas:\n- $8B for new battery gigafactories\n- $6B for EV platform development\n- $4B for charging infrastructure\n- $2B for software development\n\nCEO Oliver Blume emphasized the company's commitment: 'This investment ensures Volkswagen's position as a leader in the electric revolution. By 2026, we aim to offer electric variants in every vehicle segment.' The plan includes the construction of three new gigafactories and the conversion of existing plants to EV production.\n\nThe company expects this initiative to create over 25,000 new jobs and enable the production of 2 million EVs annually by 2026. Environmental groups have praised the announcement as a significant step toward reducing automotive emissions.",
-        "image": "/vw-factory.jpg"
-      },
-      {
-        "id": 4,
-        "category": "Technology",
-        "title": "Wireless Charging Roads Launch in Sweden",
-        "description": "Stockholm unveils first public road segment with dynamic wireless charging, allowing EVs to charge while driving.",
-        "content": "In a world-first implementation, Stockholm has activated a 2km stretch of road equipped with dynamic wireless charging technology. This innovative system allows electric vehicles to charge their batteries while in motion, potentially revolutionizing EV infrastructure.\n\nThe system's key features include:\n- Charging capacity of 75kW while driving\n- Compatible with most modern EVs\n- Weather-resistant installation\n- 97% power transfer efficiency\n\nThe project, developed in partnership with Swedish engineering firm Electreon, has already demonstrated impressive results in initial testing. Vehicles equipped with the compatible receiver can maintain or even increase their battery charge while driving on the electrified road segment.\n\n'This technology could eliminate the need for lengthy charging stops during long-distance travel,' explains Project Director Anna Bergström. 'We're already planning to expand the system to cover major highways connecting Swedish cities.'",
-        "image": "/wireless-road.jpg"
-      },
-      {
-        "id": 5,
-        "category": "Innovation",
-        "title": "Solar-Powered EV Breaks Distance Record",
-        "description": "Student-built solar electric vehicle completes 3,000-mile journey across Australia on solar power alone.",
-        "content": "A team of engineering students from the University of Melbourne has shattered the solar-powered vehicle distance record, completing a 3,000-mile journey across Australia without using external charging sources. The vehicle, dubbed 'SolarSwift', relies entirely on integrated solar panels and advanced energy management systems.\n\nTechnical specifications:\n- 8.2 square meters of high-efficiency solar panels\n- Custom-designed battery management system\n- Ultra-lightweight carbon fiber construction\n- Advanced aerodynamic design with 0.17 drag coefficient\n\nThe journey took 12 days to complete, with the vehicle maintaining an average speed of 55 mph during daylight hours. This achievement demonstrates the potential for solar integration in future electric vehicles.\n\nTeam leader Dr. James Chen stated, 'While current commercial vehicles can't yet achieve this level of solar efficiency, our project proves the viability of solar assistance for extending EV range.'",
-        "image": "/solar-swift.jpg"
-      },
-      {
-        "id": 6,
-        "category": "Market",
-        "title": "Chinese EV Makers Enter European Market",
-        "description": "BYD and NIO announce major European expansion plans, challenging established manufacturers.",
-        "content": "Chinese electric vehicle manufacturers are making a significant push into the European market, with industry giants BYD and NIO announcing extensive expansion plans. Both companies have revealed strategies to establish dealership networks and service centers across major European markets.\n\nMarket entry highlights:\n- BYD plans 200 dealerships across 8 countries\n- NIO targeting 25 battery swap stations in Germany\n- Combined investment of €3.5 billion\n- Local production facilities planned\n\nThis expansion represents a direct challenge to established European automakers, with competitive pricing and advanced technology features. Industry analysts predict Chinese manufacturers could capture up to 20% of the European EV market by 2025.\n\nEuropean automotive association ACEA has called for careful monitoring of market dynamics, while consumer groups welcome the increased competition and potential for lower prices.",
-        "image": "/chinese-ev.jpg"
-      },
-      {
-        "id": 7,
-        "category": "Technology",
-        "title": "Quantum Computing Breakthrough in Battery Design",
-        "description": "IBM's quantum computer optimizes new battery chemistry, promising 50% higher energy density.",
-        "content": "Scientists at IBM have successfully used quantum computing to simulate and optimize new battery chemistry, leading to a breakthrough in energy density potential. The quantum-assisted design process identified novel molecular configurations that could increase battery capacity by up to 50%.\n\nKey developments:\n- Quantum simulation of over 1 million molecular combinations\n- Identification of stable high-density cathode materials\n- Runtime reduced from years to weeks compared to classical computing\n- Immediate commercial potential identified\n\nThe research team collaborated with major battery manufacturers to validate the findings in real-world prototypes. Early tests show promising results that align with quantum simulations.\n\n'This represents a perfect synthesis of quantum computing and materials science,' said Dr. Robert Chang, lead researcher. 'We're now able to explore chemical combinations that were previously impossible to simulate.'",
-        "image": "/quantum-battery.jpg"
-      },
-      {
-        "id": 8,
-        "category": "Infrastructure",
-        "title": "Ultra-Fast Charging Network Expansion",
-        "description": "Global consortium announces 350kW charging stations every 50 miles on major highways.",
-        "content": "A consortium of major automakers and energy companies has announced plans to install ultra-fast 350kW charging stations every 50 miles along major highways worldwide. This $30 billion initiative aims to eliminate charging anxiety and enable truly long-distance EV travel.\n\nProject scope:\n- 50,000 new charging stations globally\n- 350kW minimum charging capacity\n- Universal compatibility\n- Renewable energy integration\n\nThe network will utilize smart grid technology to manage peak loads and integrate renewable energy sources. Solar canopies and battery storage systems will be standard at all locations.\n\n'This project removes the last major barrier to EV adoption,' stated Sarah Martinez, project director. 'No more range anxiety, no more long charging stops.'",
-        "image": "/charging-network.jpg"
-      },
-      {
-        "id": 9,
-        "category": "Industry",
-        "title": "Solid-State Battery Production Breakthrough",
-        "description": "Toyota announces first mass-production solid-state battery facility with 2025 production target.",
-        "content": "Toyota has revealed plans for the world's first mass-production facility dedicated to solid-state batteries, with production scheduled to begin in 2025. The $5.6 billion plant, located in Japan's Aichi Prefecture, represents a major breakthrough in scaling up solid-state battery technology.\n\nFacility specifications:\n- Annual production capacity: 100,000 battery packs\n- Automated production lines\n- AI-driven quality control\n- Integrated recycling facility\n\nSolid-state batteries promise several advantages over current lithium-ion technology, including faster charging times, higher energy density, and improved safety. Toyota claims their design achieves a 500-mile range with 10-minute charging capability.\n\nIndustry experts consider this development a potential tipping point for EV adoption, as solid-state batteries address many current limitations of electric vehicles.",
-        "image": "/solid-state-factory.jpg"
-      }
-    ]
+	"likes": [
+		{
+			"id": "1",
+			"name": "Elon Musk",
+			"image": "/avatars/elon.jpg"
+		},
+		{
+			"id": "2",
+			"name": "Bill Gates",
+			"image": "/avatars/bill.jpg"
+		},
+		{
+			"id": "3",
+			"name": "Mary Barra",
+			"image": "/avatars/mary.jpg"
+		}
+	],
+	"stories": [
+		{
+			"id": 1,
+			"category": "Technology",
+			"title": "Revolutionary Solid-State Battery Breakthrough",
+			"description": "A new solid-state battery technology promises 1000-mile range and 5-minute charging times, setting new standards for EV capabilities.",
+			"content": "In a groundbreaking development, researchers at the Advanced Battery Institute have unveiled a revolutionary solid-state battery technology that could transform the electric vehicle industry. The new battery design utilizes a proprietary ceramic electrolyte that enables unprecedented charging speeds while maintaining exceptional stability and safety.\n\nThe technology demonstrates remarkable metrics:\n- 1000-mile range on a single charge\n- 5-minute charging time to 80% capacity\n- Over 2000 charge cycles without significant degradation\n- Operating temperature range from -20°C to 60°C\n\nDr. Sarah Chen, lead researcher on the project, explains: 'This breakthrough addresses the three main challenges in current EV batteries: range anxiety, charging time, and battery longevity.' Several major automakers have already expressed interest in licensing the technology, with pilot production expected to begin in early 2025.\n\nThe implications for the EV industry are profound, potentially eliminating the last major barriers to widespread EV adoption. Industry analysts predict this technology could accelerate the transition to electric vehicles by at least five years.",
+			"image": "/battery-tech.jpg",
+			"isFeature": true,
+			"likes": [{ "id": "1" }, { "id": "2" }, { "id": "3" }]
+		},
+		{
+			"id": 2,
+			"category": "Market",
+			"title": "Tesla Stock Soars on Record Deliveries",
+			"description": "Tesla shares jump 15% as Q1 deliveries exceed analyst expectations by 25%, marking a new milestone for the EV giant.",
+			"content": "Tesla's stock (TSLA) experienced a dramatic surge today, climbing 15% following the announcement of record-breaking Q1 delivery numbers. The electric vehicle manufacturer reported delivering 412,000 vehicles in the first quarter of 2024, exceeding Wall Street expectations by a remarkable 25%.\n\nThe impressive delivery figures include:\n- Model Y: 245,000 units\n- Model 3: 125,000 units\n- Model S/X: 42,000 units\n\nThis performance demonstrates Tesla's continued dominance in the global EV market, despite increasing competition from traditional automakers and new EV startups. The company's successful ramp-up of production at its Berlin and Texas gigafactories has played a crucial role in achieving these numbers.\n\nAnalysts from major investment banks have revised their price targets upward, with Morgan Stanley's Adam Jonas noting, 'Tesla's execution in scaling production while maintaining healthy margins sets them apart in the industry.' The company's stock closed at $276.45, its highest level since September 2023.",
+			"image": "/tesla-stock.jpg",
+			"likes": [{ "id": "1" }, { "id": "2" }]
+		},
+		{
+			"id": 3,
+			"category": "Industry",
+			"title": "VW Announces $20B EV Investment",
+			"description": "Volkswagen Group commits $20 billion to expand electric vehicle production across Europe and North America.",
+			"content": "Volkswagen Group has unveiled an ambitious $20 billion investment plan to accelerate its electric vehicle production capabilities across Europe and North America. This strategic initiative, announced at the company's annual investor conference in Wolfsburg, represents VW's largest-ever commitment to electric mobility.\n\nThe investment will be allocated across several key areas:\n- $8B for new battery gigafactories\n- $6B for EV platform development\n- $4B for charging infrastructure\n- $2B for software development\n\nCEO Oliver Blume emphasized the company's commitment: 'This investment ensures Volkswagen's position as a leader in the electric revolution. By 2026, we aim to offer electric variants in every vehicle segment.' The plan includes the construction of three new gigafactories and the conversion of existing plants to EV production.\n\nThe company expects this initiative to create over 25,000 new jobs and enable the production of 2 million EVs annually by 2026. Environmental groups have praised the announcement as a significant step toward reducing automotive emissions.",
+			"image": "/vw-factory.jpg",
+			"likes": [{ "id": "1" }, { "id": "3" }]
+		},
+		{
+			"id": 4,
+			"category": "Technology",
+			"title": "Wireless Charging Roads Launch in Sweden",
+			"description": "Stockholm unveils first public road segment with dynamic wireless charging, allowing EVs to charge while driving.",
+			"content": "In a world-first implementation, Stockholm has activated a 2km stretch of road equipped with dynamic wireless charging technology. This innovative system allows electric vehicles to charge their batteries while in motion, potentially revolutionizing EV infrastructure.\n\nThe system's key features include:\n- Charging capacity of 75kW while driving\n- Compatible with most modern EVs\n- Weather-resistant installation\n- 97% power transfer efficiency\n\nThe project, developed in partnership with Swedish engineering firm Electreon, has already demonstrated impressive results in initial testing. Vehicles equipped with the compatible receiver can maintain or even increase their battery charge while driving on the electrified road segment.\n\n'This technology could eliminate the need for lengthy charging stops during long-distance travel,' explains Project Director Anna Bergström. 'We're already planning to expand the system to cover major highways connecting Swedish cities.'",
+			"image": "/wireless-road.jpg",
+			"likes": [{ "id": "2" }, { "id": "3" }]
+		},
+		{
+			"id": 5,
+			"category": "Innovation",
+			"title": "Solar-Powered EV Breaks Distance Record",
+			"description": "Student-built solar electric vehicle completes 3,000-mile journey across Australia on solar power alone.",
+			"content": "A team of engineering students from the University of Melbourne has shattered the solar-powered vehicle distance record, completing a 3,000-mile journey across Australia without using external charging sources. The vehicle, dubbed 'SolarSwift', relies entirely on integrated solar panels and advanced energy management systems.\n\nTechnical specifications:\n- 8.2 square meters of high-efficiency solar panels\n- Custom-designed battery management system\n- Ultra-lightweight carbon fiber construction\n- Advanced aerodynamic design with 0.17 drag coefficient\n\nThe journey took 12 days to complete, with the vehicle maintaining an average speed of 55 mph during daylight hours. This achievement demonstrates the potential for solar integration in future electric vehicles.\n\nTeam leader Dr. James Chen stated, 'While current commercial vehicles can't yet achieve this level of solar efficiency, our project proves the viability of solar assistance for extending EV range.'",
+			"image": "/solar-swift.jpg"
+		},
+		{
+			"id": 6,
+			"category": "Market",
+			"title": "Chinese EV Makers Enter European Market",
+			"description": "BYD and NIO announce major European expansion plans, challenging established manufacturers.",
+			"content": "Chinese electric vehicle manufacturers are making a significant push into the European market, with industry giants BYD and NIO announcing extensive expansion plans. Both companies have revealed strategies to establish dealership networks and service centers across major European markets.\n\nMarket entry highlights:\n- BYD plans 200 dealerships across 8 countries\n- NIO targeting 25 battery swap stations in Germany\n- Combined investment of €3.5 billion\n- Local production facilities planned\n\nThis expansion represents a direct challenge to established European automakers, with competitive pricing and advanced technology features. Industry analysts predict Chinese manufacturers could capture up to 20% of the European EV market by 2025.\n\nEuropean automotive association ACEA has called for careful monitoring of market dynamics, while consumer groups welcome the increased competition and potential for lower prices.",
+			"image": "/chinese-ev.jpg"
+		},
+		{
+			"id": 7,
+			"category": "Technology",
+			"title": "Quantum Computing Breakthrough in Battery Design",
+			"description": "IBM's quantum computer optimizes new battery chemistry, promising 50% higher energy density.",
+			"content": "Scientists at IBM have successfully used quantum computing to simulate and optimize new battery chemistry, leading to a breakthrough in energy density potential. The quantum-assisted design process identified novel molecular configurations that could increase battery capacity by up to 50%.\n\nKey developments:\n- Quantum simulation of over 1 million molecular combinations\n- Identification of stable high-density cathode materials\n- Runtime reduced from years to weeks compared to classical computing\n- Immediate commercial potential identified\n\nThe research team collaborated with major battery manufacturers to validate the findings in real-world prototypes. Early tests show promising results that align with quantum simulations.\n\n'This represents a perfect synthesis of quantum computing and materials science,' said Dr. Robert Chang, lead researcher. 'We're now able to explore chemical combinations that were previously impossible to simulate.'",
+			"image": "/quantum-battery.jpg"
+		},
+		{
+			"id": 8,
+			"category": "Infrastructure",
+			"title": "Ultra-Fast Charging Network Expansion",
+			"description": "Global consortium announces 350kW charging stations every 50 miles on major highways.",
+			"content": "A consortium of major automakers and energy companies has announced plans to install ultra-fast 350kW charging stations every 50 miles along major highways worldwide. This $30 billion initiative aims to eliminate charging anxiety and enable truly long-distance EV travel.\n\nProject scope:\n- 50,000 new charging stations globally\n- 350kW minimum charging capacity\n- Universal compatibility\n- Renewable energy integration\n\nThe network will utilize smart grid technology to manage peak loads and integrate renewable energy sources. Solar canopies and battery storage systems will be standard at all locations.\n\n'This project removes the last major barrier to EV adoption,' stated Sarah Martinez, project director. 'No more range anxiety, no more long charging stops.'",
+			"image": "/charging-network.jpg"
+		},
+		{
+			"id": 9,
+			"category": "Industry",
+			"title": "Solid-State Battery Production Breakthrough",
+			"description": "Toyota announces first mass-production solid-state battery facility with 2025 production target.",
+			"content": "Toyota has revealed plans for the world's first mass-production facility dedicated to solid-state batteries, with production scheduled to begin in 2025. The $5.6 billion plant, located in Japan's Aichi Prefecture, represents a major breakthrough in scaling up solid-state battery technology.\n\nFacility specifications:\n- Annual production capacity: 100,000 battery packs\n- Automated production lines\n- AI-driven quality control\n- Integrated recycling facility\n\nSolid-state batteries promise several advantages over current lithium-ion technology, including faster charging times, higher energy density, and improved safety. Toyota claims their design achieves a 500-mile range with 10-minute charging capability.\n\nIndustry experts consider this development a potential tipping point for EV adoption, as solid-state batteries address many current limitations of electric vehicles.",
+			"image": "/solid-state-factory.jpg"
+		}
+	]
 }

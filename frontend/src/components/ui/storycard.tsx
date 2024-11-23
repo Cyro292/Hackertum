@@ -1,7 +1,9 @@
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { AvatarGroup } from "@/components/ui/avatargroup";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { Like } from "@/types/news";
 
 interface StoryCardProps {
 	id: number;
@@ -10,6 +12,7 @@ interface StoryCardProps {
 	description: string;
 	image?: string;
 	isFeature?: boolean;
+	likes?: Like[];
 }
 
 export function StoryCard({
@@ -19,6 +22,7 @@ export function StoryCard({
 	description,
 	image,
 	isFeature = false,
+	likes = [],
 }: StoryCardProps) {
 	const router = useRouter();
 
@@ -43,6 +47,12 @@ export function StoryCard({
 							<h2 className="text-3xl font-bold">{title}</h2>
 							<p className="text-muted-foreground">{description}</p>
 							<Button onClick={handleNavigate}>Read Full Story</Button>
+							{likes.length > 0 && (
+								<div className="pt-4">
+									<p className="text-sm text-muted-foreground mb-2">Liked by</p>
+									<AvatarGroup likes={likes} />
+								</div>
+							)}
 						</div>
 					</div>
 				</CardContent>
@@ -61,6 +71,11 @@ export function StoryCard({
 			</CardHeader>
 			<CardContent>
 				<p className="text-muted-foreground">{description}</p>
+				{likes.length > 0 && (
+					<div className="mt-4">
+						<AvatarGroup likes={likes} />
+					</div>
+				)}
 			</CardContent>
 		</Card>
 	);

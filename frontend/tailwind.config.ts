@@ -61,9 +61,14 @@ export default {
 					"0%": { opacity: "0" },
 					"100%": { opacity: "1" },
 				},
+				ticker: {
+					"0%": { transform: "translateX(0)" },
+					"100%": { transform: "translateX(-50%)" },
+				},
 			},
 			animation: {
 				"fade-in": "fade-in 0.5s ease-out",
+				ticker: "ticker 20s linear infinite",
 			},
 		},
 	},

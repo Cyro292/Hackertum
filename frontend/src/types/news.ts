@@ -1,4 +1,10 @@
 // src/types/news.ts
+export interface Like {
+	id: string;
+	name: string;
+	image: string;
+}
+
 export interface Story {
 	id: number;
 	category: string;
@@ -6,7 +12,9 @@ export interface Story {
 	description: string;
 	content: string;
 	image?: string;
+	readtime?: string;
 	isFeature?: boolean;
+	likes?: Like[] | { id: string }[];
 }
 
 export interface NewsResponse {
