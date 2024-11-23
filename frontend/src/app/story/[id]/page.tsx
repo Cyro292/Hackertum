@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Headphones, FileText } from "lucide-react";
+import { ArrowLeft, Headphones } from "lucide-react";
 import { newsService } from "@/services/newsService";
 import type { Story } from "@/types/news";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import Footer from "@/components/ui/footer";
 import { StoryCard } from "@/components/ui/storycard";
 
@@ -17,7 +16,6 @@ export default function StoryDetail() {
 	const [paragraphs, setParagraphs] = useState<string[]>([]);
 	const [story, setStory] = useState<Story | null>(null);
 	const [loading, setLoading] = useState(true);
-	const [activeTab, setActiveTab] = useState("article");
 	const [article1, setArticle1] = useState<Story>();
 	const [article2, setArticle2] = useState<Story>();
 	const [relatedStories, setRelatedStories] = useState<Story[]>([]);

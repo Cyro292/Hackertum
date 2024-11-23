@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { userService } from "@/services/userService";
-import { Mail, Check, Zap, Globe, Clock, Shield } from "lucide-react";
+import { Mail, Zap, Globe, Clock, Shield } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
 export default function SubscribePage() {
@@ -105,8 +105,9 @@ export default function SubscribePage() {
 				{/* Testimonial */}
 				<div className="max-w-3xl mx-auto text-center">
 					<blockquote className="text-xl text-gray-600 italic">
-						"The most comprehensive EV newsletter I've subscribed to. A
-						must-have for anyone interested in the future of transportation."
+						&quot;The most comprehensive EV newsletter I&apos;ve subscribed to.
+						A must-have for anyone interested in the future of
+						transportation.&quot;
 					</blockquote>
 					<cite className="mt-4 block text-gray-700 font-semibold">
 						— John Smith, Tesla Monthly
