@@ -4,6 +4,7 @@ from typing import List, Optional
 from bson import ObjectId
 from pydantic import BaseModel, Field, validator
 
+from ..utils import convert_userlikedbo_to_userlike
 from ..models import NewsResponse, Story, StoryDBO, UserLike
 from ..database import stories_collection, user_likes_collection
 
@@ -35,7 +36,7 @@ class StoryCreate(BaseModel):
             raise ValueError("publishedAt must be in ISO 8601 format (YYYY-MM-DDTHH:MM:SS)")
         return v
 
-async def dbo_to_model(story_dbo: StoryDBO) -> Story:
+async def story_dbo_to_model(story_dbo: StoryDBO) -> Story:
     """
     Convert StoryDBO to Story by fetching associated UserLike documents.
     """
@@ -46,7 +47,8 @@ async def dbo_to_model(story_dbo: StoryDBO) -> Story:
         cursor = user_likes_collection.find({"_id": {"$in": user_like_ids}})
         user_likes = await cursor.to_list(length=len(user_like_ids))
         # Convert to UserLike models
-        likes = [UserLike(**ul) for ul in user_likes]
+
+        likes = [convert_userlikedbo_to_userlike(ul) for ul in user_likes]
     else:
         likes = []
 
@@ -68,24 +70,39 @@ async def dbo_to_model(story_dbo: StoryDBO) -> Story:
     )
     return story
 
-@router.get("/get_stories", response_model=NewsResponse)
-async def get_stories(page: int = Query(1, ge=1), limit: int = Query(6, ge=1)):
-    skip = (page - 1) * limit
-    cursor = stories_collection.find().skip(skip).limit(limit)
-    stories_dbo_raw = await cursor.to_list(length=limit)
-    stories_dbo = [StoryDBO(**story) for story in stories_dbo_raw]
-    stories = [await dbo_to_model(story) for story in stories_dbo]
-    return NewsResponse(stories=stories)
 
-@router.get("/get_stories_by_category", response_model=NewsResponse)
-async def get_stories_by_category(category: str):
-    cursor = stories_collection.find({"category": category})
-    stories_dbo_raw = await cursor.to_list(length=100)  # Adjust as needed
-    if not stories_dbo_raw:
-        return NewsResponse(stories=[])
+
+
+@router.get("/get_stories", response_model=NewsResponse)
+async def get_stories(
+    page: int = Query(1, ge=1, description="Page number to retrieve"),
+    limit: int = Query(7, ge=1, description="Number of stories per page"),
+    category: Optional[str] = Query(None, description="Category to filter stories by")
+):
+    skip = (page - 1) * limit
+
+    # Build the query filter
+    query_filter = {}
+    if category:
+        query_filter["category"] = category
+
+    print(f"routers/stories.py :: {stories_collection = }")
+
+    # Fetch limit + 1 stories to determine if there are more
+    cursor = stories_collection.find(query_filter).skip(skip).limit(limit + 1)
+    stories_dbo_raw = await cursor.to_list(length=limit + 1)
+    
+    # Determine if there are more stories
+    if len(stories_dbo_raw) > limit:
+        has_more = True
+        stories_dbo_raw = stories_dbo_raw[:limit]  # Trim the extra story
+    else:
+        has_more = False
+
     stories_dbo = [StoryDBO(**story) for story in stories_dbo_raw]
-    stories = [await dbo_to_model(story) for story in stories_dbo]
-    return NewsResponse(stories=stories)
+    stories = [await story_dbo_to_model(story) for story in stories_dbo]
+    return NewsResponse(stories=stories, hasMore=has_more)
+
 
 @router.get("/get_story_by_id", response_model=Story)
 async def get_story_by_id(id: str):
@@ -97,7 +114,7 @@ async def get_story_by_id(id: str):
         raise HTTPException(status_code=404, detail="Story not found")
 
     story_dbo = StoryDBO(**story_dbo_raw)
-    story = await dbo_to_model(story_dbo)
+    story = await story_dbo_to_model(story_dbo)
     return story
 
 @router.post("/create_story", response_model=Story)
@@ -134,22 +151,23 @@ async def create_story(story: StoryCreate):
         sources=story.sources
     )
 
-    result = await stories_collection.insert_one(story_dbo.dict())
+    result = await stories_collection.insert_one(story_dbo.model_dump())
+
+    print(f"routers/stories.py :: {result = }")
+
     created_story = await stories_collection.find_one({"_id": result.inserted_id})
+
+    print(f"routers/stories.py :: {created_story = }")
+
     if not created_story:
         raise HTTPException(status_code=500, detail="Failed to create story.")
 
-    story_model = await dbo_to_model(StoryDBO(**created_story))
-    return story_model
+    # created_story["_id"] = PyObjectId.validate(created_story["_id"])
+    # print(f"routers/stories.py :: {created_story = }")
 
-# Optional: Retrieve Stories by Tag
-@router.get("/get_stories_by_tag", response_model=NewsResponse)
-async def get_stories_by_tag(tag: str, page: int = Query(1, ge=1), limit: int = Query(6, ge=1)):
-    skip = (page - 1) * limit
-    cursor = stories_collection.find({"tags": tag}).skip(skip).limit(limit)
-    stories_dbo_raw = await cursor.to_list(length=limit)
-    if not stories_dbo_raw:
-        return NewsResponse(stories=[])
-    stories_dbo = [StoryDBO(**story) for story in stories_dbo_raw]
-    stories = [await dbo_to_model(story) for story in stories_dbo]
-    return NewsResponse(stories=stories)
+    story_dbo_in_db = StoryDBO(**created_story)
+
+    print(f"routers/stories.py :: {story_dbo_in_db = }")
+
+    story_model = await story_dbo_to_model(story_dbo_in_db)
+    return story_model

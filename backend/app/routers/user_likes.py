@@ -1,22 +1,34 @@
-from typing import List, Mapping, cast
 from bson import ObjectId
 from fastapi import APIRouter, HTTPException
 
+from typing import List
+
+from ..utils import convert_objectid_to_str
 from ..models import UserLikeDBO, UserLike
 from ..database import user_likes_collection
 
+
 router = APIRouter(prefix="/api/v1/user_likes", tags=["UserLikes"])
+
 
 @router.post("/create", response_model=UserLike)
 async def create_user_like(user_like: UserLikeDBO):
-    # Check if a UserLike with the same name already exists
-    existing = await user_likes_collection.find_one({"name": user_like.name})
-    if existing:
-        raise HTTPException(status_code=400, detail="UserLike with this name already exists.")
+    # # Check if a UserLike with the same name already exists
+    # existing = await user_likes_collection.find_one({"name": user_like.name})
+    # if existing:
+    #     raise HTTPException(status_code=400, detail="UserLike with this name already exists.")
 
     result = await user_likes_collection.insert_one(user_like.model_dump())
-    created_user_like: Mapping = cast(Mapping, await user_likes_collection.find_one({"_id": result.inserted_id}))
+    created_user_like = await user_likes_collection.find_one({"_id": result.inserted_id})
+
+    if not created_user_like:
+        raise HTTPException(status_code=500, detail="Failed to create UserLike.")
+
+    # Convert ObjectId to string using helper function
+    created_user_like = convert_objectid_to_str(created_user_like)
+
     return UserLike(**created_user_like)
+
 
 @router.get("/get_all", response_model=List[UserLike])
 async def get_all_user_likes():

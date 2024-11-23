@@ -6,23 +6,40 @@ from typing import cast
 from .constants import COLLECTION_NAME, DATABASE_NAME, MONGODB_URL, USER_LIKES_COLLECTION
 
 
-client: AsyncIOMotorClient = cast(AsyncIOMotorClient, None)
-db: AsyncIOMotorDatabase = cast(AsyncIOMotorDatabase, None)
-stories_collection: AsyncIOMotorCollection = cast(AsyncIOMotorCollection, None)
-user_likes_collection: AsyncIOMotorCollection = cast(AsyncIOMotorCollection, None)
+# client: AsyncIOMotorClient = cast(AsyncIOMotorClient, None)
+# db: AsyncIOMotorDatabase = cast(AsyncIOMotorDatabase, None)
+# stories_collection: AsyncIOMotorCollection = cast(AsyncIOMotorCollection, None)
+# user_likes_collection: AsyncIOMotorCollection = cast(AsyncIOMotorCollection, None)
+
+
+client: AsyncIOMotorClient = AsyncIOMotorClient(MONGODB_URL)
+db = client[DATABASE_NAME]
+
+# print(f"database.py :: {db = }")
+
+stories_collection = db[COLLECTION_NAME]
+user_likes_collection = db[USER_LIKES_COLLECTION]
+
+# def connect_to_mongo():
+#     global client, db, stories_collection, user_likes_collection
+
+#     client = AsyncIOMotorClient(MONGODB_URL)
+#     db = client[DATABASE_NAME]
+
+#     print(f"database.py :: {db = }")
+
+#     stories_collection = db[COLLECTION_NAME]
+#     user_likes_collection = db[USER_LIKES_COLLECTION]
+
+#     print(f"database.py :: {stories_collection = }")
+#     print(f"database.py :: {user_likes_collection = }")
 
 
 async def connect_to_mongo():
-    global client, db, stories_collection, user_likes_collection
+    await create_indexes()
 
-    client = AsyncIOMotorClient(MONGODB_URL)
-    db = client[DATABASE_NAME]
-
-    stories_collection = db[COLLECTION_NAME]
-    user_likes_collection = db[USER_LIKES_COLLECTION]
-
-async def close_mongo_connection():
-    await client.close()
+def close_mongo_connection():
+    client.close()
 
 # Ensure indexes if necessary
 # For example, indexing the category field for faster queries
@@ -43,5 +60,5 @@ async def create_indexes():
     await stories_collection.create_index([("title", TEXT), ("description", TEXT)])
 
     # Index for user_likes
-    await user_likes_collection.create_index([("name", ASCENDING)], unique=True)
+    await user_likes_collection.create_index([("name", ASCENDING)])
     # Add other index creations here if necessary
