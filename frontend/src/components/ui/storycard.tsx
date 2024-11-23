@@ -93,10 +93,10 @@ export function StoryCard({
 						<img
 							src={image || "/ev-featured.jpg"}
 							alt={title}
-							className="rounded-lg w-full h-[200px] object-cover"
+							className="rounded-lg w-full h-full object-cover"
 						/>
 					</div>
-					<div>
+					<div className="w-2/3 p-4">
 						<CardHeader>
 							<Badge className="w-fit">{category}</Badge>
 							<h2 className="text-xl font-bold mt-2">{title}</h2>

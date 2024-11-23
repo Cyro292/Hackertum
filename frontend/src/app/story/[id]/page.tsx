@@ -69,7 +69,7 @@ export default function StoryDetail() {
 			<div className="container mx-auto px-4 py-8">
 				<Button
 					variant="ghost"
-					onClick={() => router.back()}
+					onClick={() => router.push("/")}
 					className="mb-8 hover:scale-105 transition-transform"
 				>
 					<ArrowLeft className="mr-2 h-4 w-4" />
@@ -129,7 +129,7 @@ export default function StoryDetail() {
 								<p className="text-lg leading-relaxed">{paragraphs[0]}</p>
 							</div>
 
-							{article1 && (
+							{/* {article1 && (
 								<StoryCard
 									id={article1.id}
 									category={article1.category}
@@ -139,7 +139,7 @@ export default function StoryDetail() {
 									likes={article1.likes}
 									style="picture"
 								/>
-							)}
+							)} */}
 
 							<div className="prose dark:prose-invert">
 								<p className="text-lg leading-relaxed">{paragraphs[1]}</p>
