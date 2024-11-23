@@ -30,22 +30,24 @@ export default function StoryDetail() {
 				}
 				setParagraphs(storyData.content.split(/\n\s*\n/));
 				setStory(storyData);
+
+				// set inlineData
+				const newInlineStorys = await newsService.getInlineStories(
+					[storyId],
+					storyData.category,
+					storyData.tags || []
+				);
+				if (newInlineStorys.length > 0) {
+					setArticle2(newInlineStorys[0]);
+				}
+
+				// set relatedData
 				const newRelatedStories = await newsService.getRelatedStories(
-					storyId,
+					[storyId, ...newInlineStorys.map((s) => s.id)],
 					storyData.category,
 					storyData.tags || []
 				);
 				setRelatedStories(newRelatedStories);
-				const data = await newsService.getStories(1, 3);
-				const articles = await newsService.getInlineStories(
-					storyId,
-					storyData.category,
-					storyData.tags || []
-				);
-				// setArticle1(articles[0]);
-				if (articles.length > 0) {
-					setArticle2(articles[0]);
-				}
 			} catch (error) {
 				console.error("Failed to load story:", error);
 			} finally {
