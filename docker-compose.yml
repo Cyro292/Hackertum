@@ -7,6 +7,8 @@ services:
     container_name: frontend
     ports:
       - "3000:3000"
+    depends_on:
+      - api
     develop:
       watch:
         - action: sync
@@ -31,7 +33,6 @@ services:
       - "8000:8000"
     depends_on:
       - mongo
-      - ai_service_mock
     environment:
       - MONGO_DETAILS=mongodb://mongo:27017
       - AI_SERVICE_URL=http://ai_service_mock:5000
@@ -52,21 +53,6 @@ services:
     container_name: mongo
     volumes:
       - mongo_data:/data/db
-
-  ai_service_mock:
-    build:
-      context: ./backend/ai_service
-    container_name: ai_service_mock
-    ports:
-      - "5000:5000"
-    develop:
-      watch:
-        - action: sync
-          path: ./backend/ai_service
-          target: /app
-          ignore:
-            - "**/__pycache__/"
-            - "**/*.pyc"
 
 volumes:
   mongo_data:
