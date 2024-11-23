@@ -31,7 +31,7 @@ class NewsService {
 
 	async getStories(
 		page: number,
-		limit: number = 6,
+		limit: number = 7,
 		category: string | null = null
 	): Promise<NewsResponse> {
 		try {
