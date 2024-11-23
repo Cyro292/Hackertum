@@ -95,13 +95,13 @@ export function StoryPage({ stories, showBadges = true }: StoryPageProps) {
 					{!loading && featuredStory && (
 						<div className="transform hover:scale-[1.01] transition-transform duration-200 mb-12">
 							<StoryCard
-								isFeature
 								id={featuredStory.id}
 								category={featuredStory.category}
 								title={featuredStory.title}
 								description={featuredStory.description}
 								image={featuredStory.image}
 								likes={featuredStory.likes}
+								style="featured"
 							/>
 						</div>
 					)}
@@ -116,6 +116,7 @@ export function StoryPage({ stories, showBadges = true }: StoryPageProps) {
 								description={story.description}
 								image={story.image}
 								likes={story.likes}
+								style="compact"
 							/>
 						))}
 					</div>
