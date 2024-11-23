@@ -16,7 +16,7 @@ export default function StoryDetail() {
 	const [paragraphs, setParagraphs] = useState<string[]>([]);
 	const [story, setStory] = useState<Story | null>(null);
 	const [loading, setLoading] = useState(true);
-	const [article1, setArticle1] = useState<Story>();
+	// const [article1, setArticle1] = useState<Story>();
 	const [article2, setArticle2] = useState<Story>();
 	const [relatedStories, setRelatedStories] = useState<Story[]>([]);
 
@@ -42,7 +42,7 @@ export default function StoryDetail() {
 			try {
 				const data = await newsService.getStories(1, 3);
 				const articles = data.stories.filter((s) => s.id !== Number(params.id));
-				setArticle1(articles[0]);
+				// setArticle1(articles[0]);
 				setArticle2(articles[1]);
 			} catch (error) {
 				console.error("Failed to load articles:", error);
