@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { StoryCard } from "@/components/ui/storycard";
 import type { Story } from "@/types/news";
 import { Skeleton } from "@/components/ui/skeleton";
-import Footer from "@/components/ui/footer";
 
 interface StoryPageProps {
 	stories: Story[];
@@ -75,7 +74,7 @@ export function StoryPage({ stories, showBadges = true }: StoryPageProps) {
 		<div className="flex flex-col min-h-screen bg-gradient-to-br">
 			<Navigation />
 			<main className="flex-1">
-				<div className="container mx-auto px-4 py-12">
+				<div className="container mx-auto px-4 py-8">
 					{showBadges && (
 						<div className="flex gap-4 mb-8 animate-fade-in">
 							<Badge
@@ -122,7 +121,6 @@ export function StoryPage({ stories, showBadges = true }: StoryPageProps) {
 					</div>
 				</div>
 			</main>
-			<Footer />
 		</div>
 	);
 }
