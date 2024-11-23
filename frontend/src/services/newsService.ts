@@ -13,10 +13,12 @@ class NewsService {
 			if (!story.likes) return { ...story, likes: [] };
 			return {
 				...story,
-				likes: story.likes.map((like) => {
-					const newLike = this.likes.find((l) => l.id === like.id);
-					return newLike || like;
-				}).filter((like): like is Like => like !== undefined),
+				likes: story.likes
+					.map((like) => {
+						const newLike = this.likes.find((l) => l.id === like.id);
+						return newLike || like;
+					})
+					.filter((like): like is Like => like !== undefined),
 			};
 		});
 	}
@@ -78,6 +80,20 @@ class NewsService {
 			console.error("Error fetching story:", error);
 			throw error;
 		}
+	}
+
+	async searchStories(query: string): Promise<Story[]> {
+		const searchTerms = query.toLowerCase().split(" ");
+
+		return this.stories.filter((story) => {
+			const searchableText = `
+			${story.title.toLowerCase()} 
+			${story.description.toLowerCase()} 
+			${story.category.toLowerCase()}
+		  `;
+
+			return searchTerms.every((term) => searchableText.includes(term));
+		});
 	}
 }
 
