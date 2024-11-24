@@ -12,7 +12,7 @@ router = APIRouter(prefix="/api/v1/stories", tags=["Stories"])
 @router.get("/get_all_stories", response_model=List[Story])
 async def get_all_stories():
     # Fetch limit + 1 stories to determine if there are more
-    stories_dbo_raw = await stories_collection.to_list()
+    stories_dbo_raw = await stories_collection.find().to_list()
 
     stories_dbo = [StoryDBOId(**story) for story in stories_dbo_raw]
     stories = [await story_dbo_to_model(story) for story in stories_dbo]
