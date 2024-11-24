@@ -2,23 +2,11 @@
 import { Story, Like, NewsResponse } from "@/types/news";
 
 class NewsService {
-	private likes: Like[] = [];
-	private stories: Story[] = [];
-
-	constructor() {
-		this.initializeStories();
-	}
-
-	private async initializeStories(): Promise<void> {
-		this.stories = await this.getStoryData();
-		this.likes = await this.getLikedData();
-	}
-
-	private async getLikedData(): Promise<Like[]> {
+	public async getLikedData(): Promise<Like[]> {
 		return [];
 	}
 
-	private async getStoryData(): Promise<Story[]> {
+	public async getStoryData(): Promise<Story[]> {
 		const url = "http://188.245.176.254:8000/api/v1/stories/get_all_stories";
 
 		try {
@@ -72,7 +60,8 @@ class NewsService {
 		try {
 			const start = (page - 1) * limit;
 			const end = start + limit;
-			const categoryStories = this.stories.filter((s) => {
+			const stories = await this.getStoryData();
+			const categoryStories = stories.filter((s) => {
 				if (!category) return true;
 				return s.category.toLowerCase() === category.toLowerCase();
 			});
@@ -92,9 +81,10 @@ class NewsService {
 		}
 	}
 
-	async getStoryById(id: number): Promise<Story | null> {
+	async getStoryById(id: string): Promise<Story | null> {
 		try {
-			const story = this.stories.find((s) => s.id === id);
+			const stories = await this.getStoryData();
+			const story = stories.find((s) => s.id === id);
 			await new Promise((resolve) => setTimeout(resolve, 100));
 			return story || null;
 		} catch (error) {
@@ -105,8 +95,9 @@ class NewsService {
 
 	async searchStories(query: string): Promise<Story[]> {
 		const searchTerms = query.toLowerCase().split(" ");
+		const stories = await this.getStoryData();
 
-		return this.stories.filter((story) => {
+		return stories.filter((story) => {
 			const searchableText = `
 			${story.title.toLowerCase()} 
 			${story.description.toLowerCase()} 
@@ -118,12 +109,13 @@ class NewsService {
 	}
 
 	async getRelatedStories(
-		exclude: number[],
+		exclude: string[],
 		category: string,
 		tags: string[],
 		number: number = 3
 	): Promise<Story[]> {
-		const relatedStories = this.stories
+		const stories = await this.getStoryData();
+		const relatedStories = stories
 			.filter((story) => {
 				// const hasCategory =
 				// 	story.category.toLowerCase() === category.toLowerCase();
@@ -137,13 +129,14 @@ class NewsService {
 	}
 
 	async getInlineStories(
-		exclude: number[],
+		exclude: string[],
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		category: string,
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		tags: string[]
 	): Promise<Story[]> {
-		const inlineStories = this.stories
+		const stories = await this.getStoryData();
+		const inlineStories = stories
 			.filter((story) => {
 				// const hasCategory =
 				// 	story.category.toLowerCase() === category.toLowerCase();
@@ -157,7 +150,8 @@ class NewsService {
 	}
 
 	async getFeaturedStory(category: string): Promise<Story | null> {
-		const featured = this.stories.find((story) => story.category === category);
+		const stories = await this.getStoryData();
+		const featured = stories.find((story) => story.category === category);
 
 		return featured || null;
 	}

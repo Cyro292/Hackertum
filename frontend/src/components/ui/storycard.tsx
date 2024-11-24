@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Like } from "@/types/news";
 
 interface StoryCardProps {
-	id: number;
+	id: string;
 	category: string;
 	title: string;
 	description: string;

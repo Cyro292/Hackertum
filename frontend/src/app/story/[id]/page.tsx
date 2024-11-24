@@ -23,7 +23,7 @@ export default function StoryDetail() {
 	useEffect(() => {
 		const loadStory = async () => {
 			try {
-				const storyId = Number(params.id);
+				const storyId = params.id as string;
 				const storyData = await newsService.getStoryById(storyId);
 				if (!storyData) {
 					throw new Error("Story not found");

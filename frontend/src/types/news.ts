@@ -6,7 +6,7 @@ export interface Like {
 }
 
 export interface Story {
-	id: number;
+	id: string;
 	category: string;
 	title: string;
 	description: string;
