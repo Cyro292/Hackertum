@@ -32,7 +32,7 @@ async def create_user_like(user_like: UserLikeCreate):
 @router.get("/get_all", response_model=List[UserLike])
 async def get_all_user_likes():
     cursor = user_likes_collection.find()
-    user_likes_dbos_raw = await cursor.to_list(length=100)  # Adjust as needed
+    user_likes_dbos_raw = await cursor.to_list()  # Adjust as needed
 
     user_likes_dbos = [UserLikeDBOId(**ul) for ul in user_likes_dbos_raw]
 
