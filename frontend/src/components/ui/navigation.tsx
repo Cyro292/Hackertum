@@ -11,7 +11,7 @@ export function Navigation() {
 			<StockTicker />
 			<div className="container mx-auto px-4 h-16 flex items-center justify-between">
 				<Link href="/">
-					<h1 className="text-2xl font-bold">EVNews</h1>
+					<h1 className="text-2xl font-bold">X-Sider</h1>
 				</Link>
 				<div className="flex items-center gap-4 flex-1 max-w-xl mx-4">
 					<div className="relative w-full">

@@ -94,10 +94,11 @@ class NewsService {
 	): Promise<Story[]> {
 		const relatedStories = this.stories
 			.filter((story) => {
-				const hasCategory =
-					story.category.toLowerCase() === category.toLowerCase();
-				const hasTags = tags.every((tag) => story.tags?.includes(tag));
-				return !exclude.includes(story.id) && (hasCategory || hasTags);
+				// const hasCategory =
+				// 	story.category.toLowerCase() === category.toLowerCase();
+				// const hasTags = tags.every((tag) => story.tags?.includes(tag));
+				return !exclude.includes(story.id) 
+						// && (hasCategory || hasTags);
 			})
 			.slice(0, number);
 
@@ -106,15 +107,18 @@ class NewsService {
 
 	async getInlineStories(
 		exclude: number[],
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		category: string,
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		tags: string[]
 	): Promise<Story[]> {
 		const inlineStories = this.stories
 			.filter((story) => {
-				const hasCategory =
-					story.category.toLowerCase() === category.toLowerCase();
-				const hasTags = tags.every((tag) => story.tags?.includes(tag));
-				return !exclude.includes(story.id) && (hasCategory || hasTags);
+				// const hasCategory =
+				// 	story.category.toLowerCase() === category.toLowerCase();
+				// const hasTags = tags.every((tag) => story.tags?.includes(tag));
+				return !exclude.includes(story.id) 
+						// && (hasCategory || hasTags);
 			})
 			.slice(0, 2);
 
