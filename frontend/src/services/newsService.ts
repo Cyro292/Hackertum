@@ -1,36 +1,67 @@
 // src/services/newsService.ts
-import storiesData from "@/data/stories.json";
 import { Story, Like, NewsResponse } from "@/types/news";
 
 class NewsService {
-	private likes: Like[] = this.getLikedData();
-	private stories: Story[] = this.getStoryData();
+	private likes: Like[] = [];
+	private stories: Story[] = [];
 
-	private getLikedData(): Like[] {
-		return storiesData.likes;
+	constructor() {
+		this.initializeStories();
 	}
 
-	private getStoryData(): Story[] {
-		const stories = storiesData.stories;
+	private async initializeStories(): Promise<void> {
+		this.stories = await this.getStoryData();
+		this.likes = await this.getLikedData();
+	}
 
-		return stories.map((story) => {
-			if (!story.likes)
-				return {
-					...story,
-					likes: [],
-					publishedAt: new Date().toISOString(),
-				};
-			return {
-				...story,
-				publishedAt: new Date().toISOString(),
-				likes: story.likes
-					.map((like) => {
-						const newLike = this.likes.find((l) => l.id === like.id);
-						return newLike || like;
-					})
-					.filter((like): like is Like => like !== undefined),
-			};
-		});
+	private async getLikedData(): Promise<Like[]> {
+		return [];
+	}
+
+	private async getStoryData(): Promise<Story[]> {
+		const url = "http://188.245.176.254:8000/api/v1/stories/get_all_stories";
+
+		try {
+			const controller = new AbortController();
+			const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
+			const response = await fetch(url, {
+				method: "GET",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				signal: controller.signal,
+			});
+
+			clearTimeout(timeoutId);
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
+			const data = await response.json();
+
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			return data.map((story: any) => ({
+				id: story.id,
+				category: story.category,
+				title: story.title,
+				description: story.description,
+				content: story.content,
+				image: story.image,
+				readtime: story.readtime,
+				isFeature: story.isFeature,
+				publishedAt: story.publishedAt,
+				author: story.author,
+				audio: story.audio,
+				tags: story.tags,
+				sources: story.sources,
+			}));
+		} catch (error) {
+			console.error("Failed to fetch stories:", error);
+			return [];
+		}
 	}
 
 	async getStories(
@@ -97,8 +128,8 @@ class NewsService {
 				// const hasCategory =
 				// 	story.category.toLowerCase() === category.toLowerCase();
 				// const hasTags = tags.every((tag) => story.tags?.includes(tag));
-				return !exclude.includes(story.id) 
-						// && (hasCategory || hasTags);
+				return !exclude.includes(story.id);
+				// && (hasCategory || hasTags);
 			})
 			.slice(0, number);
 
@@ -117,8 +148,8 @@ class NewsService {
 				// const hasCategory =
 				// 	story.category.toLowerCase() === category.toLowerCase();
 				// const hasTags = tags.every((tag) => story.tags?.includes(tag));
-				return !exclude.includes(story.id) 
-						// && (hasCategory || hasTags);
+				return !exclude.includes(story.id);
+				// && (hasCategory || hasTags);
 			})
 			.slice(0, 2);
 
