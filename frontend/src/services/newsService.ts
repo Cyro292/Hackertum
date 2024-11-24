@@ -7,7 +7,7 @@ class NewsService {
 	}
 
 	public async getStoryData(): Promise<Story[]> {
-		const url = "http://188.245.176.254:8000/api/v1/stories/get_all_stories";
+		const url = "https://api.veldt.nexus/api/v1/stories/get_all_stories";
 
 		try {
 			const controller = new AbortController();
@@ -42,7 +42,7 @@ class NewsService {
 				isFeature: story.isFeature,
 				publishedAt: story.publishedAt,
 				author: story.author,
-				audio: story.audio,
+				audio: `/audio/${story.audio}`, // Using proper path construction
 				tags: story.tags,
 				sources: story.sources,
 			}));
