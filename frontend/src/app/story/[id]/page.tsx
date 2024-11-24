@@ -114,11 +114,8 @@ export default function StoryDetail() {
 					<div className="flex items-center gap-4 mb-8 text-gray-600">
 						<div>
 							<p className="text-sm">
-								Published on {new Date(story.publishedAt).toLocaleDateString()}
-							</p>
-							<p className="text-sm">
-								{story.readtime ? story.readtime : "5"}min readtime &middot;{" "}
-								{story.author}
+								Published on {new Date(story.publishedAt).toLocaleDateString()}{" "}
+								| {story.readtime ? story.readtime : "5"}min readtime
 							</p>
 						</div>
 					</div>
@@ -203,6 +200,13 @@ export default function StoryDetail() {
 											</li>
 										))}
 									</ul>
+								</div>
+							)}
+							{story.author && (
+								<div>
+									<div className="flex items-center gap-4 text-sm font-thin italic">
+										Written by {story.author}
+									</div>
 								</div>
 							)}
 							<div className="flex items-center gap-4 mt-8">

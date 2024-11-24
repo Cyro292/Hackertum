@@ -5,8 +5,8 @@ import Link from "next/link";
 function Footer() {
 	return (
 		<Card className="w-[100%] border-none rounded-none bg-slate-100">
-			<div className="container px-4 py-8 mx-auto flex justify-center">
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+			<div className="container px-12 py-12 mx-auto flex flex-col justify-center">
+				<div className="flex flex-row justify-between gap-8">
 					<div className="space-y-3">
 						<h3 className="font-semibold tracking-tight">About Us</h3>
 						<nav className="flex flex-col space-y-2">
