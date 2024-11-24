@@ -42,7 +42,7 @@ class NewsService {
 				isFeature: story.isFeature,
 				publishedAt: story.publishedAt,
 				author: story.author,
-				audio: `/audio/${story.audio}`, // Using proper path construction
+				audio: `https://github.com/Constant-Sudo/file-bucket4132/raw/refs/heads/main/bucket/${story.audio}`, // Using proper path construction
 				tags: story.tags,
 				sources: story.sources,
 			}));
