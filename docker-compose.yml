@@ -1,12 +1,26 @@
 version: '3.8'
 
 services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"     # HTTP
+      - "443:443"   # HTTPS
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - webnet
+
   frontend:
     build:
       context: ./frontend
     container_name: frontend
     ports:
-      - "3000:3000"
+      - "3000"
     depends_on:
       - api
       - minio
@@ -25,6 +39,8 @@ services:
         - action: sync+restart
           path: ./frontend/package.json
           target: /app/package.json
+    networks:
+      - webnet
 
   api:
     build:
@@ -32,7 +48,7 @@ services:
     container_name: api
     restart: always
     ports:
-      - "8000:8000"
+      - "8000"
     depends_on:
       - mongo
       - minio
@@ -49,6 +65,8 @@ services:
         - action: sync+restart
           path: ./backend/requirements.txt
           target: /backend/requirements.txt
+    networks:
+      - webnet
 
   mongo:
     image: mongo:4.4
@@ -59,12 +77,14 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
+    networks:
+      - webnet
 
   mongo-express:
     image: mongo-express
     restart: always
     ports:
-      - 8081:8081
+      - 8081
     depends_on:
       - mongo
     environment:
@@ -72,13 +92,15 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
       ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
       ME_CONFIG_BASICAUTH: false
+    networks:
+      - webnet
 
   minio:
     image: minio/minio:latest
     container_name: minio
     ports:
-      - "9000:9000"  # MinIO API
-      - "8091:9001"  # MinIO Console
+      - 9000  # MinIO API
+      - 8091  # MinIO Console
     environment:
       MINIO_ROOT_USER: root
       MINIO_ROOT_PASSWORD: fileserver
@@ -86,12 +108,21 @@ services:
     volumes:
       - minio_data:/data
       - minio_config:/root/.minio
-    command: server /data --console-address ":9001"
+    command: server /data --console-address ":8091"
     restart: unless-stopped
+    networks:
+      - webnet
 
 volumes:
+  caddy_data:
+  caddy_config:
   mongo_data:
   minio_data:
     driver: local
   minio_config:
     driver: local
+
+
+networks:
+  webnet:
+    driver: bridge
