@@ -9,6 +9,7 @@ services:
       - "3000:3000"
     depends_on:
       - api
+      - minio
     develop:
       watch:
         - action: sync
@@ -34,9 +35,9 @@ services:
       - "8000:8000"
     depends_on:
       - mongo
+      - minio
     environment:
-      - MONGO_DETAILS=mongodb://mongo:27017
-      - AI_SERVICE_URL=http://ai_service_mock:5000
+      - MONGO_DETAILS=mongodb://root:root@mongo:27017
     develop:
       watch:
         - action: sync+restart
@@ -72,6 +73,25 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
       ME_CONFIG_BASICAUTH: false
 
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"  # MinIO API
+      - "8091:9001"  # MinIO Console
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: fileserver
+      MINIO_PROMETHEUS_AUTH_TYPE: "public"  # Optional: For Prometheus metrics
+    volumes:
+      - minio_data:/data
+      - minio_config:/root/.minio
+    command: server /data --console-address ":9001"
+    restart: unless-stopped
+
 volumes:
   mongo_data:
-
+  minio_data:
+    driver: local
+  minio_config:
+    driver: local
