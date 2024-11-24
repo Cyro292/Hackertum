@@ -32,9 +32,18 @@ export function StoryCard({
 		router.push(`/story/${id}`);
 	};
 
+	function truncateText(text: string, maxLength: number): string {
+		if (text.length <= maxLength) {
+			return text;
+		}
+		const truncated = text.substring(0, maxLength);
+		const lastSpaceIndex = truncated.lastIndexOf(" ");
+		return truncated.substring(0, lastSpaceIndex) + "...";
+	}
+
 	if (style === "featured") {
 		return (
-			<Card className="mb-12">
+			<Card className="mb-12 overflow-hidden">
 				<CardContent className="p-6">
 					<div className="grid md:grid-cols-2 gap-8">
 						<div>
@@ -80,11 +89,11 @@ export function StoryCard({
 	if (style === "compact") {
 		return (
 			<Card
-				className="cursor-pointer hover:scale-[1.02] transition-all duration-200"
+				className="cursor-pointer hover:scale-[1.02] transition-all duration-200 overflow-hidden"
 				onClick={handleNavigate}
 			>
 				<CardHeader>
-					<div className="flex flex-row gap-10 items-start">
+					<div className="flex flex-wrap gap-4 items-start">
 						<Badge className="w-fit">{category}</Badge>
 						{tags && tags.length > 0 && (
 							<div className="flex flex-wrap gap-2">
@@ -103,7 +112,9 @@ export function StoryCard({
 					<h2 className="text-xl font-bold mt-2">{title}</h2>
 				</CardHeader>
 				<CardContent>
-					<p className="text-muted-foreground">{description}</p>
+					<p className="text-muted-foreground">
+						{truncateText(description, 200)}
+					</p>
 					{likes.length > 0 && (
 						<div className="mt-4">
 							<AvatarGroup likes={likes} />
@@ -117,7 +128,7 @@ export function StoryCard({
 	if (style === "picture") {
 		return (
 			<Card
-				className="cursor-pointer hover:scale-[1.02] transition-all duration-200"
+				className="cursor-pointer hover:scale-[1.02] transition-all duration-200 overflow-hidden"
 				onClick={handleNavigate}
 			>
 				<div className="flex">
@@ -130,7 +141,7 @@ export function StoryCard({
 					</div>
 					<div className="w-2/3 p-4">
 						<CardHeader>
-							<div className="flex flex-row gap-10 items-start">
+							<div className="flex flex-wrap gap-4 items-start">
 								<Badge className="w-fit">{category}</Badge>
 								{tags && tags.length > 0 && (
 									<div className="flex flex-wrap gap-2">
@@ -149,7 +160,9 @@ export function StoryCard({
 							<h2 className="text-xl font-bold mt-2">{title}</h2>
 						</CardHeader>
 						<CardContent>
-							<p className="text-muted-foreground">{description}</p>
+							<p className="text-muted-foreground">
+								{truncateText(description, 300)}
+							</p>
 							{likes.length > 0 && (
 								<div className="mt-4">
 									<AvatarGroup likes={likes} />
