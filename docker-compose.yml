@@ -9,6 +9,7 @@ services:
       - "3000:3000"
     depends_on:
       - api
+      - minio
     develop:
       watch:
         - action: sync
@@ -34,6 +35,7 @@ services:
       - "8000:8000"
     depends_on:
       - mongo
+      - minio
     environment:
       - MONGO_DETAILS=mongodb://root:root@mongo:27017
     develop:
