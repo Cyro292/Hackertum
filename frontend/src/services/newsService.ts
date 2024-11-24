@@ -63,7 +63,7 @@ class NewsService {
 			const stories = await this.getStoryData();
 			const categoryStories = stories.filter((s) => {
 				if (!category) return true;
-				return s.category.toLowerCase() === category.toLowerCase();
+				return s.category.toLowerCase().includes(category.toLowerCase());
 			});
 			const paginatedStories = categoryStories.slice(start, end);
 
@@ -123,6 +123,7 @@ class NewsService {
 				return !exclude.includes(story.id);
 				// && (hasCategory || hasTags);
 			})
+			.sort(() => Math.random() - 0.5)
 			.slice(0, number);
 
 		return relatedStories;
@@ -144,6 +145,7 @@ class NewsService {
 				return !exclude.includes(story.id);
 				// && (hasCategory || hasTags);
 			})
+			.sort(() => Math.random() - 0.5)
 			.slice(0, 2);
 
 		return inlineStories;
@@ -151,7 +153,11 @@ class NewsService {
 
 	async getFeaturedStory(category: string): Promise<Story | null> {
 		const stories = await this.getStoryData();
-		const featured = stories.find((story) => story.category === category);
+		const categoryStories = stories.filter((story) =>
+			story.category.toLowerCase().includes(category.toLowerCase())
+		);
+		const featured =
+			categoryStories[Math.floor(Math.random() * categoryStories.length)];
 
 		return featured || null;
 	}

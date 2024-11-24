@@ -3,7 +3,13 @@ import { StockTicker } from "@/components/ui/stockticker";
 import Link from "next/link";
 import { SearchBar } from "@/components/ui/searchbar";
 import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+	Sheet,
+	SheetContent,
+	SheetHeader,
+	SheetTitle,
+	SheetTrigger,
+} from "@/components/ui/sheet";
 
 export function Navigation() {
 	return (
@@ -19,17 +25,17 @@ export function Navigation() {
 					</div>
 				</div>
 				<nav className="hidden md:flex items-center space-x-4 ml-auto">
-					<Link href="/latest">
-						<Button variant="ghost">Latest Models</Button>
-					</Link>
 					<Link href="/technology">
 						<Button variant="ghost">Technology</Button>
 					</Link>
-					<Link href="/reviews">
-						<Button variant="ghost">Reviews</Button>
+					<Link href="/politics">
+						<Button variant="ghost">Politics</Button>
 					</Link>
-					<Link href="/industry">
-						<Button variant="ghost">Industry</Button>
+					<Link href="/car">
+						<Button variant="ghost">Cars</Button>
+					</Link>
+					<Link href="/bike">
+						<Button variant="ghost">Bikes</Button>
 					</Link>
 					<Link href="/subscribe">
 						<Button variant="default">Subscribe</Button>

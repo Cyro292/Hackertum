@@ -7,7 +7,7 @@ import type { Story } from "@/types/news";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/ui/footer";
 
-export default function ReviewsPage() {
+export default function CarPage() {
 	const [stories, setStories] = useState<Story[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
@@ -17,7 +17,7 @@ export default function ReviewsPage() {
 	const fetchStories = async (pageNum: number) => {
 		try {
 			setLoading(true);
-			const data = await newsService.getStories(pageNum, 7, "reviews");
+			const data = await newsService.getStories(pageNum, 7, "automobil");
 			setStories((prev) =>
 				pageNum === 1 ? data.stories : [...prev, ...data.stories]
 			);

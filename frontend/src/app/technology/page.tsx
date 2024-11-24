@@ -17,7 +17,7 @@ export default function Technology() {
 	const fetchStories = async (pageNum: number) => {
 		try {
 			setLoading(true);
-			const data = await newsService.getStories(pageNum, 7, "technology");
+			const data = await newsService.getStories(pageNum, 7, "Technologie");
 			setStories((prev) =>
 				pageNum === 1 ? data.stories : [...prev, ...data.stories]
 			);
