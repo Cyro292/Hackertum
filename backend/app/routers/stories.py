@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Query
-from typing import Optional
+from typing import List, Optional
 from bson import ObjectId
 
 from ..utils import story_dbo_to_model
@@ -8,6 +8,15 @@ from ..database import stories_collection, user_likes_collection
 
 
 router = APIRouter(prefix="/api/v1/stories", tags=["Stories"])
+
+@router.get("/get_all_stories", response_model=List[Story])
+async def get_all_stories():
+    # Fetch limit + 1 stories to determine if there are more
+    stories_dbo_raw = await stories_collection.find().to_list()
+
+    stories_dbo = [StoryDBOId(**story) for story in stories_dbo_raw]
+    stories = [await story_dbo_to_model(story) for story in stories_dbo]
+    return stories
 
 
 @router.get("/get_stories", response_model=NewsResponse)
